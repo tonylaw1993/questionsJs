@@ -31,7 +31,7 @@ if (!roomId || roomId.length === 0) {
 }
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://scorching-inferno-6291.firebaseio.com/";
+var firebaseURL = "https://classquestion.firebaseio.com/";
 
 
 $scope.roomId = roomId;
@@ -133,17 +133,6 @@ $scope.editTodo = function (todo) {
 $scope.addEcho = function (todo) {
 	$scope.editedTodo = todo;
 	todo.echo = todo.echo + 1;
-	// Hack to order using this order.
-	todo.order = todo.order -1;
-	$scope.todos.$save(todo);
-
-	// Disable the button
-	$scope.$storage[todo.$id] = "echoed";
-};
-
-$scope.minEcho = function (todo) {
-	$scope.editedTodo = todo;
-	todo.echo = todo.echo - 1;
 	// Hack to order using this order.
 	todo.order = todo.order -1;
 	$scope.todos.$save(todo);
