@@ -80,7 +80,7 @@ $scope.getFirstAndRestSentence = function($string) {
 	var head = $string;
 	var desc = "";
 
-	var separators = ['.', '?', '!', '\n'];
+	var separators = ['. ', '? ', '! ', '\n'];
 
 	var firstIndex = -1;
 	for (var i in separators) {
