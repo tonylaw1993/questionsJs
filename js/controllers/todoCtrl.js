@@ -7,8 +7,8 @@
 * - exposes the model to the template and provides event handlers
 */
 todomvc.controller('TodoCtrl',
-['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
-function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
+['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window', '$sanitize',
+function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sanitize) {
 	// set local storage
 	$scope.$storage = $localStorage;
 
@@ -66,6 +66,9 @@ $scope.$watchCollection('todos', function () {
 		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
+		if (todo.timestamp <= new Date().getTime() - 180000) { // 3min
+        todo.new = false;
+		}
 	});
 
 	$scope.totalCount = total;
@@ -105,23 +108,27 @@ $scope.addTodo = function () {
 		return;
 	}
 
-	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
+	/*var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
-
+	*/
+	var title = $scope.input.head.trim();
+	
 	$scope.todos.$add({
 		wholeMsg: newTodo,
-		head: head,
-		headLastChar: head.slice(-1),
-		desc: desc,
-		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
+		head: title,
+		headLastChar: title.slice(-1),
+		desc: 0,
+		linkedDesc: Autolinker.link(newTodo, {newWindow: false, stripPrefix: false}),
 		completed: false,
 		timestamp: new Date().getTime(),
 		tags: "...",
 		echo: 0,
-		order: 0
+		order: 0,
+		new: true
 	});
 	// remove the posted question in the input
+	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
 };
 
@@ -133,12 +140,17 @@ $scope.editTodo = function (todo) {
 $scope.addEcho = function (todo) {
 	$scope.editedTodo = todo;
 	todo.echo = todo.echo + 1;
-	// Hack to order using this order.
-	todo.order = todo.order -1;
 	$scope.todos.$save(todo);
+	// Disable the unlike button
+	$scope.$storage[todo.$id] = true;
+};
 
-	// Disable the button
-	$scope.$storage[todo.$id] = "echoed";
+$scope.minEcho = function (todo) {
+	$scope.editedTodo = todo;
+	todo.echo = todo.echo - 1;
+	$scope.todos.$save(todo);
+	// Enable the like button
+	$scope.$storage[todo.$id] = false;
 };
 
 $scope.doneEditing = function (todo) {
@@ -211,6 +223,7 @@ $scope.increaseMax = function () {
 $scope.toTop =function toTop() {
 	$window.scrollTo(0,0);
 };
+
 
 // Not sure what is this code. Todel
 if ($location.path() === '') {
