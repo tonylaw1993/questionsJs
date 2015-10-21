@@ -19,8 +19,13 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
-	<link rel="stylesheet" href="main.css">
-
+	<link rel="stylesheet" href="css/main.css">
+	<!-- Emoji -->
+	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.a.css">
+	
+	
+	
 </head>
 <body>
 	<font size="10">Questions for {{roomId}}?</font>&nbsp;
@@ -34,6 +39,7 @@
 -->
 
 <small>Share room url: {{absurl}}</small> &nbsp;
+<div class="header">
 <a class="btn btn-default" href="/index.html">Main</a>
 <button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Want Admin? Sign in with Facebook</button>
 
@@ -41,7 +47,7 @@
 <img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
 {{$authData.facebook.displayName}}
 <button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>
-
+</div>
 
 
 <div class="form-group">
@@ -53,7 +59,7 @@ placeholder="Search or Question Content"
 ng-model="input.wholeMsg" required maxlength="1024"></textarea>
 <span class="form-group-btn">
 	<button class="btn btn-default" type="submit">Ask</button>
-	<button class="btn btn-default" type="">Add Emoji</button>
+	<button class="btn btn-default" id="emoji">Add Emoji</button>
 	<button class="btn btn-default" type="">Add Code</button>
 </span>
 </form>
@@ -97,11 +103,15 @@ ng-model="input.wholeMsg" required maxlength="1024"></textarea>
 <script src="js/lib/Autolinker.min.js"></script>
 
 <!-- 2.2.2 -->
+<script src="js/lib/jquery.min.js"></script>
 <script src="js/lib/firebase.js"></script>
 <script src="js/lib/angular.min.js"></script>
 <script src="js/lib/angularfire.js"></script>
-<script src="https://code.angularjs.org/1.4.7/angular-sanitize.js"></script>
+<script src="js/lib/angular-sanitize.min.js"></script>
 
+<!-- Emoji Picker-->
+<script src="js/lib/jquery.emojipicker.js"></script>
+<script src="js/lib/jquery.emojipicker.a.js"></script>
 <!-- Ng storage 0.3.6  -->
 <script src="js/lib/ngStorage.min.js"></script>
 
@@ -111,5 +121,19 @@ ng-model="input.wholeMsg" required maxlength="1024"></textarea>
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
+
+<script>
+	$(document).ready(function(e) {
+      $('#new-todo').emojiPicker({
+        width: '300px',
+        height: '200px',
+        button: false
+      });
+			$('#emoji').click(function(e) {
+        e.preventDefault();
+        $('#new-todo').emojiPicker('toggle');
+      });
+	});
+	</script>
 </body>
 </html>

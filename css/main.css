@@ -3,6 +3,14 @@
 	text-decoration: line-through;
 }
 
+.form-group{
+	padding: 10px;
+}
+
+.header{
+	float: right;
+	/* padding-top: 30px; */
+}
 
 .icon{display: inline-block;}
 .icon,
@@ -31,3 +39,4 @@
 	display: none;
 }
 #toTop .fa {margin-right: 5px;}
+
