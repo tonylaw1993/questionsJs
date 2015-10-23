@@ -76,7 +76,7 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 		</h4>
 		<p class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky"></span></p>
-		<p class="list-group-item-text">created: {{todo.timestamp |  date:"MM/dd/yyyy 'at' h:mma"}}
+		<p class="list-group-item-text">created: <span am-time-ago="todo.timestamp"></span>
 			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
 
 			<button class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-show="!$storage[todo.$id]">Like</button>
@@ -111,6 +111,11 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <!-- Emoji Picker-->
 <script src="js/lib/jquery.emojipicker.js"></script>
 <script src="js/lib/jquery.emojipicker.a.js"></script>
+
+<!-- AngularMoment-->
+<script src="js/lib/moment.js"></script>
+<script src="js/lib/angular-moment.min.js"></script>
+
 <!-- Ng storage 0.3.6  -->
 <script src="js/lib/ngStorage.min.js"></script>
 
