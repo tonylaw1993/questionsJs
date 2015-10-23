@@ -68,7 +68,7 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <div class="list-group" id="todo-list">
 	<span class="list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:maxQuestion " ng-class="{completed: todo.completed, editing: todo == editedTodo}">
 		<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-			<span class="label label-danger" ng-show="todo.new">New</span>
+			<span class="label label-danger" ng-show="todo.latest">New</span>
 			<span class="badge">{{todo.echo}}</span>
 			<!-- switch -->
 			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>

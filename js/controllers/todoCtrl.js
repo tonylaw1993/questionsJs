@@ -67,7 +67,7 @@ $scope.$watchCollection('todos', function () {
 
 		//todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc); //To be removed
 		if (todo.timestamp <= new Date().getTime() - 180000) { // 3min
-        todo.new = false;
+        todo.latest = false;
 		}
 	});
 
@@ -131,7 +131,7 @@ $scope.addTodo = function () {
 		echo: 0,
 		dislike: 0,
 		order: 0,
-		new: true
+		latest: true
 	});
 	// remove the posted question in the input
 	$scope.input.head = '';

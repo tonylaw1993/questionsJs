@@ -15,7 +15,7 @@ todomvc.filter('questionFilter', function () {
 		var maxEcho = 0;
 		
     angular.forEach(input, function (todo) {
-			if (todo.new == true){
+			if (todo.latest == true){
 				newQuestions.unshift(todo);
 			} else if (todo.timestamp > new Date().getTime() - 180000) { // 3min
         //todo.new = true;
@@ -24,7 +24,7 @@ todomvc.filter('questionFilter', function () {
 				maxEcho = todo.echo;
 				newQuestions.push(todo);
 			} else if (sortedCount++<=max){  // show top n only.
-        todo.new = false;
+        todo.latest = false;
         sorted.push(todo);
       }
 
