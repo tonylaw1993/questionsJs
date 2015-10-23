@@ -65,7 +65,7 @@ $scope.$watchCollection('todos', function () {
 		todo.dateString = new Date(todo.timestamp).toString();
 		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
-		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
+		//todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc); //To be removed
 		if (todo.timestamp <= new Date().getTime() - 180000) { // 3min
         todo.new = false;
 		}
@@ -78,7 +78,7 @@ $scope.$watchCollection('todos', function () {
 	$scope.absurl = $location.absUrl();
 }, true);
 
-// Get the first sentence and rest
+// Get the first sentence and rest, to be removed, use autolinker to create links for Android
 $scope.getFirstAndRestSentence = function($string) {
 	var head = $string;
 	var desc = "";
@@ -101,13 +101,18 @@ $scope.getFirstAndRestSentence = function($string) {
 };
 
 $scope.addTodo = function () {
-	var newTodo = $scope.input.wholeMsg.trim();
-
+	var inputMsg = $scope.input.wholeMsg;
+	// If there is only emoji or no message is input, just do nothing
+	if (inputMsg === undefined){
+		return;
+	}
+	var newTodo = inputMsg.trim();
+	/*
 	// No input, so just do nothing
 	if (!newTodo.length) {
 		return;
 	}
-
+	*/
 	/*var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
@@ -124,6 +129,7 @@ $scope.addTodo = function () {
 		timestamp: new Date().getTime(),
 		tags: "...",
 		echo: 0,
+		dislike: 0,
 		order: 0,
 		new: true
 	});

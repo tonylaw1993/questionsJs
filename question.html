@@ -53,14 +53,13 @@
 <div class="form-group">
 <form id="todo-form" ng-submit="addTodo()">
 
-<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" autofocus required maxlength="128"></input>
+<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" autofocus required maxlength="128" title="Please enter question title!"></input>
 <textarea type="text" id="new-todo" class="form-control"
 placeholder="Search or Question Content"
-ng-model="input.wholeMsg" required maxlength="1024"></textarea>
+ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!"></textarea>
 <span class="form-group-btn">
 	<button class="btn btn-default" type="submit">Ask</button>
 	<button class="btn btn-default" id="emoji">Add Emoji</button>
-	<button class="btn btn-default" type="">Add Code</button>
 </span>
 </form>
 </div><!-- /form-group -->
@@ -132,7 +131,9 @@ ng-model="input.wholeMsg" required maxlength="1024"></textarea>
 			$('#emoji').click(function(e) {
         e.preventDefault();
         $('#new-todo').emojiPicker('toggle');
+				$('.emojiPicker').css("left","175px");
       });
+			
 	});
 	</script>
 </body>
