@@ -15,15 +15,19 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
 
-	/*
-	$(window).scroll(function(){
-	if($(window).scrollTop() > 0) {
-	$("#btn_top").show();
-} else {
-$("#btn_top").hide();
-}
-});
-*/
+           /*
+        $(window).scroll(function(){
+        if($(window).scrollTop() > 0) {
+        $("#btn_top").show();
+        } else {
+        $("#btn_top").hide();
+        }
+        });
+        */
+
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                $scope.mobile = true;
+           }
 var splits = $location.path().trim().split("/");
 var roomId = angular.lowercase(splits[1]);
 if (!roomId || roomId.length === 0) {
@@ -132,7 +136,13 @@ $scope.addTodo = function () {
 		dislike: 0,
 		order: 0,
 		latest: true
-	});
+        }).then(function(ref){
+                var id = ref.key();
+                $scope.$storage[id] = {
+                       liked: false,
+                       disliked: false
+                      };
+        });
 	// remove the posted question in the input
 	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
@@ -144,19 +154,67 @@ $scope.editTodo = function (todo) {
 };
 
 $scope.addEcho = function (todo) {
-	$scope.editedTodo = todo;
-	todo.echo = todo.echo + 1;
+        $scope.editedTodo = todo;
+        // Initial Stage
+        if ($scope.$storage[todo.$id].liked == false){
+                if ($scope.$storage[todo.$id].disliked == false){
+                        // This user like this question
+                        todo.echo = todo.echo + 1;
+                        // Change the Like button
+	                  $scope.$storage[todo.$id].liked = true;
+                } else {
+                        // From Dislike to Like
+                        todo.dislike = todo.dislike - 1;
+                        todo.echo = todo.echo + 1;
+                        $scope.$storage[todo.$id].liked = true;
+                        $scope.$storage[todo.$id].disliked = false;
+                        }
+        } else {
+                // Do nothing
+                return;
+                }
+      // Save the result
 	$scope.todos.$save(todo);
-	// Disable the unlike button
-	$scope.$storage[todo.$id] = true;
+};
+
+$scope.addDislike = function (todo) {
+        $scope.editedTodo = todo;
+        //Initial Stage
+        if ($scope.$storage[todo.$id].disliked == false){
+                if ($scope.$storage[todo.$id].liked == false){
+                        //This user dislike this question
+                        todo.dislike = todo.dislike + 1;
+                        // change the dislike button
+	                  $scope.$storage[todo.$id].disliked = true;
+                } else {
+                        //From Like to dislike
+                        todo.echo = todo.echo - 1;
+                        todo.dislike = todo.dislike + 1;
+                        $scope.$storage[todo.$id].liked = false;
+                        $scope.$storage[todo.$id].disliked = true;
+                        }
+        } else {
+                // Do nothing
+                return;
+                }
+      // Save the result
+	$scope.todos.$save(todo);
 };
 
 $scope.minEcho = function (todo) {
 	$scope.editedTodo = todo;
 	todo.echo = todo.echo - 1;
 	$scope.todos.$save(todo);
-	// Enable the like button
-	$scope.$storage[todo.$id] = false;
+	// Change the like button
+	$scope.$storage[todo.$id].liked = false;
+};
+
+$scope.minDislike = function (todo) {
+	$scope.editedTodo = todo;
+	todo.dislike = todo.dislike - 1;
+	$scope.todos.$save(todo);
+	// Change the dislike button
+	$scope.$storage[todo.$id].disliked = false;
 };
 
 $scope.doneEditing = function (todo) {

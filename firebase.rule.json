@@ -11,7 +11,7 @@
           // a widget can have a title or color attribute
           "echo": { ".validate": "newData.isNumber()" },
           "head": { ".validate": "newData.isString()"},
-          "desc": { ".validate": true },
+          /* "desc": { ".validate": true }, */
           "timestamp": { ".validate": "newData.val() <= now" }  
           
           // but no other child paths are allowed
