@@ -64,14 +64,21 @@ $scope.$watchCollection('todos', function () {
 		if (todo.completed === false) {
 			remaining++;
 		}
-
+                
+            if ($scope.$storage[todo.$id] == undefined){
+                $scope.$storage[todo.$id] = {
+                        liked: false,
+                        disliked: false
+                        }
+                }                
+                
 		// set time
 		todo.dateString = new Date(todo.timestamp).toString();
 		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 		//todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc); //To be removed
 		if (todo.timestamp <= new Date().getTime() - 180000) { // 3min
-        todo.latest = false;
+                todo.latest = false;
 		}
 	});
 
