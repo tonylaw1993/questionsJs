@@ -39,3 +39,6 @@
 }
 #toTop .fa {margin-right: 5px;}
 
+.title, .list-group-item-text {
+	word-wrap: break-word;
+}
