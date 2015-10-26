@@ -32,7 +32,7 @@
 
 #toTop{
 	position: fixed;
-	bottom: 95px;
+	bottom: 100px;
 	right: 40px;
 	cursor: pointer;
 	display: none;
