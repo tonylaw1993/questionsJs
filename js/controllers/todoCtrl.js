@@ -12,6 +12,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
 	// set local storage
 	$scope.$storage = $localStorage;
 
+
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
 
@@ -184,7 +185,7 @@ $scope.addEcho = function (todo) {
 	$scope.todos.$save(todo);
 };
 
-$scope.addDislike = function (todo) {
+$scope.addDislike = function (todo) {		// +1 dislike
         $scope.editedTodo = todo;
         //Initial Stage
         if ($scope.$storage[todo.$id].disliked == false){
@@ -216,7 +217,7 @@ $scope.minEcho = function (todo) {
 	$scope.$storage[todo.$id].liked = false;
 };
 
-$scope.minDislike = function (todo) {
+$scope.minDislike = function (todo) {		// -1 dislike
 	$scope.editedTodo = todo;
 	todo.dislike = todo.dislike - 1;
 	$scope.todos.$save(todo);
