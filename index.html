@@ -45,6 +45,7 @@
 								autofocus
 								aria-describedby="sizing-addon1"
 								placeholder="Create Your own Room">
+								<a ng-show="form.input.$error.required || form.input.$error.pattern"> <----here </a>
 								<a  class="btn_enter"
 								ng-hide="form.input.$error.required || form.input.$error.pattern"
 								ng-click="join()" 
