@@ -1,88 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
-
+<html lang="en"  ng-app="app">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<title>HKUSQroom</title>
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/index.css" rel="stylesheet">
-	
-	<!-- Font  CSS -->
-	<link href='https://fonts.googleapis.com/css?family=Lato|Roboto:400,700' rel='stylesheet' type='text/css'>
-	
-	
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+	<!-- CSS -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
+	<link href="css/simple-line-icons.css" rel="stylesheet" media="screen">
+	<link href="css/animate.css" rel="stylesheet">
+    
+	<!-- Custom styles CSS -->
+	<link href="css/style.css" rel="stylesheet" media="screen">
+    
+    <script src="js/modernizr.custom.js"></script>
+       
 </head>
+<body ng-controller="controller">
 
-<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in 
-Bootstrap scrollspy function -->
+	<!-- Preloader -->
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" ng-controller="controller">
+	<div id="preloader">
+		<div id="status"></div>
+	</div>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">HKUST</a>
-            </div>
+	<!-- Home start -->
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section 
--->
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-	
-	
-	
-	
-    <!-- Intro Section -->
-    <section id="intro" class="intro-section">
-       <div class="jumbotron">
-			<div class="container">
+	<section id="home" class="pfblock-image screen-height" >
+        <div class="home-overlay"></div>
+		<div class="intro">
 				<h1 class=" title"> HKUST </h1>
 				<h1 class=" title"> Question</h1>
 				<h1 class=" title"> Room</h1>
+				
 				<form name="form" ng-submit="join()" class="navbar-form navbar-left" role="search">
 								<input type="text" name = "input" class="form-control large" ;
 								ng-model="example.text"
@@ -90,70 +44,345 @@ Bootstrap scrollspy function -->
 								ng-trim="false"
 								autofocus
 								aria-describedby="sizing-addon1"
-								placeholder="Room name">
-								<a href="#" class="btn"
+								placeholder="Create Your own Room">
+								<a  class="btn_enter"
 								ng-hide="form.input.$error.required || form.input.$error.pattern"
 								ng-click="join()" 
 								>Enter</a>
-							</form>
-			</div>
+				</form>
 		</div>
 
-    </section>
+        <a href="#categories">
+		<div class="scroll-down">
+            <span>
+                <i class="fa fa-angle-down fa-2x"></i>
+            </span>
+		</div>
+        </a>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
+	</section>
+
+	<!-- Home end -->
+
+	<!-- Navigation start -->
+
+	<header class="header">
+
+		<nav class="navbar navbar-custom" role="navigation">
+
+			<div class="container">
+
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">HKUSQ</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="custom-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#Popular">Popular</a></li>
+						<li><a href="#categories">categories</a></li>
+						<li><a href="#contact">Our Team</a></li>
+					</ul>
+				</div>
+
+			</div><!-- .container -->
+
+		</nav>
+
+	</header>
+
+	<!-- Navigation end -->
+
+	<!-- Popular start -->
+
+	<section id="Popular" class="pfblock">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-6 col-sm-offset-3">
+
+					<div class="pfblock-header wow fadeInUp">
+						<h2 class="pfblock-title">The Top 6 Popular Room</h2>
+						<div class="pfblock-line"></div>
+						<div class="pfblock-subtitle">
+						
+						</div>
+					</div>
+
+				</div>
+
+			</div><!-- .row -->
+            
+            
             <div class="row">
-                <div class="col-lg-12">
-                    <h1>About Section</h1>
+                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <a href = "question.html#/COMP3111">
+					
+                    <div  class="grid wow zoomIn"  >
+                        <figure  class="effect-bubba">
+						
+                            <img  src="images/item-1.jpg" alt="img01"/>
+							
+							
+                            <figcaption >
+                                <h2>COMP <span>3111/H</span></h2>
+                                <p>Kim Sung</p>
+
+                            </figcaption>
+							
+                        </figure>
+                    </div>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Services Section</h1>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+					<a href = "question.html#/COMP3511">
+                    <div class="grid wow zoomIn">
+                        <figure class="effect-bubba">
+                            <img src="images/item-2.jpg" alt="img01"/>
+                            <figcaption>
+                                <h2>COMP <span>3511</span></h2>
+                                <p>Li Bo</p>
+                            </figcaption>			
+                        </figure>
+                    </div>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-	
-	
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Contact Section</h1>
+                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+					<a href = "question.html#/COMP2011">
+                    <div class="grid wow zoomIn">
+                        <figure class="effect-bubba">
+                            <img src="images/item-3.jpg" alt="img01"/>
+                            <figcaption>
+                                <h2>COMP <span>2011</span></h2>
+                                <p>Brian Mak</p>
+                            </figcaption>			
+                        </figure>
+                    </div>
+                    </a>
                 </div>
+                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+					<a href = "question.html#/COMP2012">
+                    <div class="grid wow zoomIn">
+                        <figure class="effect-bubba">
+                            <img src="images/item-4.jpg" alt="img01"/>
+                            <figcaption>
+                                <h2>COMP <span>2012</span></h2>
+                                <p>Long QUAN</p>
+                            </figcaption>			
+                        </figure>
+                    </div>
+                    </a>
+                </div>
+                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+					<a href = "question.html#/COMP3711">
+                    <div class="grid wow zoomIn">
+                        <figure class="effect-bubba">
+                            <img src="images/item-5.jpg" alt="img01"/>
+                            <figcaption>
+                                <h2>COMP <span>3711</span></h2>
+                                <p>Ke Yi</p>
+                            </figcaption>			
+                        </figure>
+                    </div>
+                    </a>
+                </div>
+                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+					<a href = "question.html#/COMP2711">
+                    <div class="grid wow zoomIn">
+                        <figure class="effect-bubba">
+                            <img src="images/item-6.jpg" alt="img01"/>
+                            <figcaption>
+                                <h2>COMP <span>2711</span></h2>
+                                <p>Chiew Lan TAI </p>
+                            </figcaption>			
+                        </figure>
+                    </div>
+                    </a>
+                </div>
+                
             </div>
-        </div>
-    </section>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
-	
-	
-	
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+		</div><!-- .contaier -->
 
-    <!-- Scrolling Nav JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/index.js"></script>
+	</section>
+
+	<!-- Team end -->
 	
+	
+	
+	
+    <!-- Categories start -->
+
+	<section id="categories" class="pfblock pfblock-gray">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-6 col-sm-offset-3">
+
+					<div class="pfblock-header wow fadeInUp">
+						<h2 class="pfblock-title">Categories </h2>
+						<div class="pfblock-line"></div>
+						<div class="pfblock-subtitle">
+							
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="col-sm-3">
+
+					<div class="iconbox wow slideInLeft">
+						<div class="iconbox-icon">
+							<span class="icon-magic-wand"></span>
+						</div>
+						<div class="iconbox-text">
+							<h3 class="iconbox-title"></h3>
+							<div class="iconbox-desc">
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-sm-3">
+
+					<div class="iconbox wow slideInLeft">
+						<div class="iconbox-icon">
+							<span class="icon-puzzle"></span>
+						</div>
+						<div class="iconbox-text">
+							<h3 class="iconbox-title"></h3>
+							<div class="iconbox-desc">
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-sm-3">
+
+					<div class="iconbox wow slideInRight">
+						<div class="iconbox-icon">
+							<span class="iconbox wow slideInLeft animated"></span>
+						</div>
+						<div class="iconbox-text">
+							<h3 class="iconbox-title"></h3>
+							<div class="iconbox-desc">
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-sm-3">
+
+					<div class="iconbox wow slideInRight">
+						<div class="iconbox-icon">
+							<span class="icon-question"></span>
+						</div>
+						<div class="iconbox-text">
+							<h3 class="iconbox-title"></h3>
+							<div class="iconbox-desc">
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div><!-- .row -->
+		</div><!-- .container -->
+	</section>
+
+	<!-- Categories end -->
+    
+	
+    
+    
+
+	<!-- Footer start -->
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<ul class="social-links">
+						<li><a href="index.html#" class="wow fadeInUp"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="index.html#" class="wow fadeInUp" data-wow-delay=".1s"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="index.html#" class="wow fadeInUp" data-wow-delay=".2s"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="index.html#" class="wow fadeInUp" data-wow-delay=".4s"><i class="fa fa-pinterest"></i></a></li>
+						<li><a href="index.html#" class="wow fadeInUp" data-wow-delay=".5s"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+
+					
+                    <p class="copyright">
+                        CopyRight © Em 2015
+					</p>
+
+				</div>
+
+			</div><!-- .row -->
+		</div><!-- .container -->
+	</footer>
+
+	<!-- Footer end -->
+
+	<!-- Scroll to top -->
+
+	<div class="scroll-up">
+		<a href="#home"><i class="fa fa-angle-up"></i></a>
+	</div>
+    
+    <!-- Scroll to top end-->
+
+	<!-- Javascript files -->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/jquery.parallax-1.1.3.js"></script>
+	<script src="js/imagesloaded.pkgd.js"></script>
+	<script src="js/jquery.sticky.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/wow.min.js"></script>
+    <script src="js/jquery.easypiechart.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.cbpQTRotator.js"></script>
+	<script src="js/custom.js"></script>
+	
+		
 	<script src="js/lib/angular.min.js"></script>
 
 			<script>
 			angular.module('app', [])
 			.controller('controller', ['$scope', '$location', '$window', function($scope, $location, $window) {
+				
+				$scope.data = {
+				text:''
+				
+				};
+				
 				$scope.example = {
 					text: '',
 					word: /^\s*\w*\s*$/
@@ -162,10 +391,16 @@ Bootstrap scrollspy function -->
 				$scope.join = function () {
 					$window.location.href = 'question.html#/' + $scope.example.text;
 				}
+				
+				
+				
+				
+				$scope.submit = function () {
+					$window.location.href = 'question.html#/' + $scope.data.text;
+				}
+				
 			}]);
 			</script>
 
-
 </body>
-
 </html>

@@ -73,7 +73,7 @@ of those sections to manage the look and feel of the site. */
 	
 }
 
-  input[type="text"] {
+ .intro-section .jumbotron .container  input[type="text"] {
   display: block;
   margin: 0;
   width: 100%;
@@ -93,9 +93,7 @@ of those sections to manage the look and feel of the site. */
 //Button
 
 
-
-
- .intro-section btn {
+ .btn_enter {
 	
   color: #2b335a;
   border: 2px #2b335a solid;
@@ -114,7 +112,7 @@ of those sections to manage the look and feel of the site. */
   
 }
 
- .intro-section btn :hover {
+   .btn_enter :hover {
  background-color: #2b335a;
   color: #fff
   cursor: url(http://cur.cursors-4u.net/symbols/sym-1/sym46.cur), auto;
