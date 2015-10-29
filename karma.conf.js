@@ -18,7 +18,7 @@ module.exports = function(config) {
       'js/lib/jquery.min.js',
       'js/lib/angular.min.js',
       'js/lib/*.js',
-      'js/*.js',
+      'js/app.js',
       'js/**/*.js',
 
       'test/unit/*.js',
@@ -29,7 +29,6 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
 			'js/directives/*.js',
-			'js/index.js',
 			'js/dummy.js',
 			'test/unit/dummyTest.js'
     ],
@@ -38,7 +37,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'js/*.js': 'coverage',
+      'js/app.js': 'coverage',
       'js/controllers/*.js': 'coverage',
       'js/filters/*.js': 'coverage',
 //      'js/directives/*.js': 'coverage'
