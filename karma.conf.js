@@ -21,12 +21,17 @@ module.exports = function(config) {
       'js/*.js',
       'js/**/*.js',
 
-      'test/unit/*.js'
+      'test/unit/*.js',
+			'node_modules/mockfirebase/browser/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
+			'js/directives/*.js',
+			'js/index.js',
+			'js/dummy.js',
+			'test/unit/dummyTest.js'
     ],
 
 
@@ -36,7 +41,7 @@ module.exports = function(config) {
       'js/*.js': 'coverage',
       'js/controllers/*.js': 'coverage',
       'js/filters/*.js': 'coverage',
-      'js/directives/*.js': 'coverage'
+//      'js/directives/*.js': 'coverage'
     },
 
 
@@ -72,13 +77,13 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
     plugins: [
       'karma-jasmine',
       'karma-coverage',
-      'karma-chrome-launcher',
-//      'karma-firefox-launcher',
+//      'karma-chrome-launcher',
+      'karma-firefox-launcher',
     ],
 
     //

@@ -90,28 +90,6 @@ $scope.$watchCollection('todos', function () {
 	$scope.absurl = $location.absUrl();
 }, true);
 
-// Get the first sentence and rest, to be removed, use autolinker to create links for Android
-$scope.getFirstAndRestSentence = function($string) {
-	var head = $string;
-	var desc = "";
-
-	var separators = ['. ', '? ', '! ', '\n'];
-
-	var firstIndex = -1;
-	for (var i in separators) {
-		var index = $string.indexOf(separators[i]);
-		if (index == -1) continue;
-		if (firstIndex == -1) {firstIndex = index; continue;}
-		if (firstIndex > index) {firstIndex = index;}
-	}
-
-	if (firstIndex !=-1) {
-		head = $string.slice(0, firstIndex+1);
-		desc = $string.slice(firstIndex+1);
-	}
-	return [head, desc];
-};
-
 $scope.addTodo = function () {
 	var inputMsg = $scope.input.wholeMsg;
 	// If there is only emoji or no message is input, just do nothing
@@ -124,10 +102,6 @@ $scope.addTodo = function () {
 	if (!newTodo.length) {
 		return;
 	}
-	*/
-	/*var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
-	var head = firstAndLast[0];
-	var desc = firstAndLast[1];
 	*/
 	var title = $scope.input.head.trim();
 	
@@ -242,26 +216,6 @@ $scope.revertEditing = function (todo) {
 
 $scope.removeTodo = function (todo) {
 	$scope.todos.$remove(todo);
-};
-
-$scope.clearCompletedTodos = function () {
-	$scope.todos.forEach(function (todo) {
-		if (todo.completed) {
-			$scope.removeTodo(todo);
-		}
-	});
-};
-
-$scope.toggleCompleted = function (todo) {
-	todo.completed = !todo.completed;
-	$scope.todos.$save(todo);
-};
-
-$scope.markAll = function (allCompleted) {
-	$scope.todos.forEach(function (todo) {
-		todo.completed = allCompleted;
-		$scope.todos.$save(todo);
-	});
 };
 
 $scope.FBLogin = function () {

@@ -4,3 +4,5 @@ node_modules
 .idea/tasks.xml
 *.iws
 coverage
+js/dummy.js
+test/unit/dummyTest.js
