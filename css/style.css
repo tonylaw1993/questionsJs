@@ -624,7 +624,7 @@ textarea.form-control {
 
 .scroll-down span{
     position: relative;
-    color: #fff;
+    color: #2b335a;
     -webkit-animation-name: drop;
 	-webkit-animation-duration: 1s;
 	-webkit-animation-timing-function: linear;
