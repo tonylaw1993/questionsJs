@@ -1,5 +1,20 @@
 'use strict';
 
+var sampleTodo = {
+		wholeMsg: "",//newTodo
+		head: "",//title
+		headLastChar: "",//title.slice(-1)
+		desc: 0,
+		linkedDesc: Autolinker.link("", {newWindow: false, stripPrefix: false}),
+		completed: false,
+		timestamp: new Date().getTime(),
+		tags: "...",
+		echo: 0,
+		dislike: 0,
+		order: 0,
+		latest: false
+};
+
 var questionList=[{
   wholeMsg: "newTodo",
   head: "head",
@@ -10,7 +25,9 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 3,
-  order: 3
+	dislike: 0,
+  order: 0,
+	latest: false
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -21,7 +38,9 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 2,
-  order: 4
+	dislike: 0,
+  order: 4,
+	latest: false
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -32,7 +51,9 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 2,
-  order: 5
+	dislike: 0,
+  order: 5,
+	latest: false
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -43,7 +64,9 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 2,
-  order: 6
+	dislike: 2,
+  order: 0,
+	latest: false
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -54,7 +77,9 @@ var questionList=[{
   timestamp: new Date().getTime(), //new
   tags: "...",
   echo: 2,
-  order: 0
+	dislike: 2,
+  order: 0,
+	latest: false
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -65,7 +90,9 @@ var questionList=[{
   timestamp: new Date().getTime()-1, //new
   tags: "...",
   echo: 0,
-  order: 2
+	dislike: 3,
+  order: 2,
+	latest: false
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -76,7 +103,9 @@ var questionList=[{
   timestamp: new Date().getTime(), // latest
   tags: "...",
   echo: 0,
-  order: 1
+	dislike: 0,
+  order: 1,
+	latest: true
 }];
 
 describe('TodoCtrl', function() {
@@ -92,20 +121,26 @@ describe('TodoCtrl', function() {
       expect($filter('questionFilter')).not.toBeNull();
     }));
 
-    it('Filter order test', inject(function(questionFilterFilter) { // need to put Filter suffix
-      var filteredList = questionFilterFilter(questionList, 100);
-      for (var i in filteredList) {
-        expect(""+filteredList[i].order).toEqual(i);
-      }
-    }));
 
     it('Filter max test', inject(function(questionFilterFilter) { // need to put Filter suffix
-      var filteredList = questionFilterFilter(questionList, 1);
-      expect(filteredList.length).toEqual(5);
-
-      for (var i in filteredList) {
-        expect(""+filteredList[i].order).toEqual(i);
-      }
+      var filteredList = questionFilterFilter(questionList, 0);
+      expect(filteredList.length).toEqual(0);
+			console.log(JSON.stringify(filteredList, null, '\t'));
     }));
+		
+		it('Filter max test', inject(function(questionFilterFilter) { // need to put Filter suffix
+      var filteredList = questionFilterFilter(questionList, 100);
+      expect(filteredList.length).toEqual(7);
+			console.log(JSON.stringify(filteredList, null, '\t'));
+
+    }));
+		
+		it('Filter max test', inject(function(questionFilterFilter) { // need to put Filter suffix
+      var filteredList = questionFilterFilter(questionList, 1);
+      expect(filteredList.length).toEqual(1);
+			console.log(JSON.stringify(filteredList, null, '\t'));
+
+    }));
+		
   });
 });
