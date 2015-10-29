@@ -120,25 +120,32 @@ describe('TodoCtrl', function() {
     it('has a question filter', inject(function($filter) {
       expect($filter('questionFilter')).not.toBeNull();
     }));
+		
+		it('Empty list', inject(function(questionFilterFilter) { // need to put Filter suffix
+      var filteredList = questionFilterFilter([], 1);
+      expect(filteredList).toBe(undefined);
+			//console.log(JSON.stringify(filteredList, null, '\t'));
 
+    }));
+		
 
     it('Filter max test', inject(function(questionFilterFilter) { // need to put Filter suffix
       var filteredList = questionFilterFilter(questionList, 0);
       expect(filteredList.length).toEqual(0);
-			console.log(JSON.stringify(filteredList, null, '\t'));
+			//console.log(JSON.stringify(filteredList, null, '\t'));
     }));
 		
 		it('Filter max test', inject(function(questionFilterFilter) { // need to put Filter suffix
       var filteredList = questionFilterFilter(questionList, 100);
       expect(filteredList.length).toEqual(7);
-			console.log(JSON.stringify(filteredList, null, '\t'));
+			//console.log(JSON.stringify(filteredList, null, '\t'));
 
     }));
 		
 		it('Filter max test', inject(function(questionFilterFilter) { // need to put Filter suffix
       var filteredList = questionFilterFilter(questionList, 1);
       expect(filteredList.length).toEqual(1);
-			console.log(JSON.stringify(filteredList, null, '\t'));
+			//console.log(JSON.stringify(filteredList, null, '\t'));
 
     }));
 		

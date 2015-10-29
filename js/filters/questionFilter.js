@@ -15,6 +15,8 @@ todomvc.filter('questionFilter', function () {
 		
     var maxResponse = 0;
 		var x;
+		if (input.length == 0)
+			return;
 		for (x in input){
 			if (input[x].latest == true){ // a newly posted question
 					newQuestions.push(input[x]);
