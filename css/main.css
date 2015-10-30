@@ -1,11 +1,120 @@
+body {
+	margin-top: 60px;
+}
+
+
 .completed {
 	color: #d9d9d9;
 	text-decoration: line-through;
 }
 
+/***				===
+	Form Group
+====				***/
+
 .form-group{
-	padding: 10px;
+	margin-left:auto;
+    margin-right:auto;
+
+    max-width: 100%;
+    background: #FFF;
+    padding-right: 10px;
+    padding-left: 10px;
+
+    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #888;
+    text-shadow: 1px 1px 1px #FFF;
+    border:1px solid #DDD;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	
 }
+
+
+.form-group h1 {
+    font: 25px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0px 0px 10px 40px;
+    display: block;
+    border-bottom: 1px solid #DADADA;
+    margin: -10px -30px 30px -30px;
+    color: #888;
+}
+
+
+
+
+.form-group label {
+    display: block;
+    margin: 0px 0px 5px;
+}
+
+.form-group label>span {
+    float: left;
+    width: 100%;
+    text-align: left;
+    padding-right: 10px;
+    margin-top: 10px;
+    color: #333;
+	font-size:16px;
+    font-family: Arial, sans-serif;
+    
+}
+
+.form-group input[type="text"] {
+    height:25px;
+    padding: 5px 0px 0px 5px;
+    width: 100%;
+}
+
+.form-group textarea{
+    height:100px;
+    padding: 5px 0px 0px 5px;
+    width: 100%;
+}
+
+.form-group button {
+	float: right;
+    background: #FFF;
+    border: 1px solid #CCC;
+    padding: 10px 25px 10px 25px;
+    color: #333;
+    border-radius: 4px;
+}
+.form-group button:hover {
+	float: right;
+    color: #333;
+    background-color: #EBEBEB;
+    border-color: #ADADAD;
+}
+/***				===
+	Scroll-Up
+====				***/
+.scroll-up {
+	position: fixed;
+	display: none;
+	z-index: 999;
+	bottom: 2em;
+	right: 2em;
+}
+
+.scroll-up a {
+	background-color: rgba(135, 135, 135, 0.5);
+	display: block;
+	width: 35px;
+	height: 35px;
+	text-align: center;
+	color: #fff;
+	font-size: 15px;
+	line-height: 30px;
+}
+
+.scroll-up a:hover,
+.scroll-up a:active {
+	background-color: rgba(235, 235, 235, .8);
+	color: #e7746f;
+}
+
 
 .header{
 	float: right;
