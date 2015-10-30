@@ -110,7 +110,7 @@ $scope.addTodo = function () {
 		head: title,
 		headLastChar: title.slice(-1),
 		desc: 0,
-		linkedDesc: Autolinker.link(newTodo, {newWindow: false, stripPrefix: false}),
+		linkedDesc: Autolinker.link(newTodo, {newWindow: true, stripPrefix: false}),
 		completed: false,
 		timestamp: new Date().getTime(),
 		tags: "...",
