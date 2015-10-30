@@ -87,6 +87,24 @@ body {
     background-color: #EBEBEB;
     border-color: #ADADAD;
 }
+
+/***				===
+	List-group
+====				***/
+
+
+.list-group h3 {
+    font: 22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: block;
+	padding-right: 10px;
+    padding-left: 10px;
+    
+}
+
+
+
+
+
 /***				===
 	Scroll-Up
 ====				***/

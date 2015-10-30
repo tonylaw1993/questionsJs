@@ -15,8 +15,10 @@
 
 	<title>Question Room: {{roomId}}</title>
 
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
 	
 
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
@@ -64,7 +66,6 @@
 	<!--<font size="10">Questions Room: {{roomId}}?</font>&nbsp;-->
 
 	<!--
-
 	<a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
 	<a ng-class="{selected: location.path() == '/tags'}" class="btn btn-success" href="#/tags">Tags</a>
 	<a ng-class="{selected: location.path() == '/users'}" class="btn btn-info" href="#/users">Users</a>
@@ -112,7 +113,6 @@
   <!--
 <div class="form-group">
 <form id="todo-form" ng-submit="addTodo()">
-
 <input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" autofocus required maxlength="128" title="Please enter question title!"></input>
 <textarea type="text" id="new-todo" class="form-control"
 placeholder="Search or Question Content"
@@ -153,6 +153,15 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 	</div><!-- /list-group -->
 	
 	
+	
+	<!-- Scroll to top -->
+
+	<div class="scroll-up">
+		<a href="#top"><i class="fa fa-angle-up"></i></a>
+	</div>
+    
+    <!-- Scroll to top end-->
+	
 	<!--
 <div class="list-group" id="todo-list">
 	<span class="list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:todos.length " ng-class="{completed: todo.completed, editing: todo == editedTodo}">
@@ -167,7 +176,6 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 		<p class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
 		
 			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
-
 			<button class="btn btn-success btn-sm glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">Like <span class="badge">{{todo.echo}}</span></button>
 			<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">Unlike <span class="badge">{{todo.echo}}</span></button>
                   <button class="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">Dislike <span class="badge">{{todo.dislike}}</span></button>
@@ -181,9 +189,7 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 		-->
 		
 	<!--
-
 	<div id="toTop" class="btn btn-info"><span class="fa fa-arrow-up">Back to Top</span></div>
-
 	<button ng-hide="totalCount<=maxQuestion"
 	class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
 	type="button" ng-click="increaseMax()"> Show more</button>
@@ -223,21 +229,40 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <script src="js/lib/bootstrap.min.js"></script>
 
 
-<script>
-$(document).ready(function(e) {
-        $('#new-todo').emojiPicker({
-                width: '300px',
-                height: '200px',
-                button: false
-                });
-        $('#emoji').click(function(e) {
-                e.preventDefault();
-                $('#new-todo').emojiPicker('toggle');
-                $('.emojiPicker').css("left","175px");
-                });
+		<script>
+			$(document).ready(function(e) {
+				$('#new-todo').emojiPicker({
+					width: '300px',
+					height: '200px',
+					button: false
+				});
+				
+				$('#emoji').click(function(e) {
+					e.preventDefault();
+					$('#new-todo').emojiPicker('toggle');
+					$('.emojiPicker').css("left","175px");
+				});
+			
+				$('a[href*=#]').bind("click", function(e){
+           
+			
+			
+				$('html, body').stop().animate({
+					scrollTop: 0
+					}, 1000);
+					e.preventDefault();
+				});
+
+				$(window).scroll(function() {
+					if ($(this).scrollTop() > 100) {
+						$('.scroll-up').fadeIn();
+					} else {
+						$('.scroll-up').fadeOut();
+					}
+				});
+			
 			
 });
-
 </script>
 </body>
 </html>
