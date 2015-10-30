@@ -49,7 +49,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Questions Room: {{roomId}}</a>
+          <a class="navbar-brand" href="#">Questions Room: <tt>{{roomId}}</tt></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
          
@@ -88,23 +88,24 @@
 	<div class="container">
 	    <div class="form-group">	
 			<form id="todo-form" ng-submit="addTodo()">
+			
 				<h2>Ask a Question</h2>
-				<label>
-					<span>Title :</span>
-					<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />
-				</label>
-						
-				<label>
-					<span>Content :</span>
+				
+				<div class="form-group-title">
+					<label>Title :</label>
+					<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />	
+				</div>
+				
+				<div class="form-group-content">
+					<label>Content :</label>
 					<textarea  type="text" id="new-todo" class="form-control"
 					placeholder="Search or Question Content"
-					ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!"></textarea>
-				</label> 
+					ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!">
+					</textarea>
+				</div>
+				<button class="btn btn-submit" type="submit">Ask</button>
+				<button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
 				
-				<span class="form-group-btn">
-					<button class="btn btn-default" type="submit">Ask</button>
-					<button class="btn btn-default" id="emoji" ng-disabled="!mobile">Add Emoji</button>
-				</span>
 			</form>
         </div>		
 	</div> <!-- /form-group -->
@@ -131,12 +132,20 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 			<h3>Question Lists</h3>
 			
 			<span class="list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:todos.length " ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+				
+				
 				<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-			<span class="label label-danger" ng-show="todo.latest">New</span>
-			<span class="badge">{{todo.echo+todo.dislike}}</span>
+					<span class="label label-danger" ng-show="todo.latest">New</span>
+					<span class="badge">{{todo.echo+todo.dislike}}</span>
+					</br>
 			<!-- switch -->
+			
+			
+			<!-- 
 			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
 			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
+			
+			 -->
 			<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
 				</h4>
 					<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>

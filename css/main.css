@@ -44,9 +44,15 @@ body {
 
 
 
-.form-group label {
-    display: block;
-    margin: 0px 0px 5px;
+.form-group .form-group-title label , .form-group .form-group-content  label {
+     float: left;
+    width: 100%;
+    text-align: left;
+    padding-right: 10px;
+    margin-top: 10px;
+    color: #333;
+	font-size:18px;
+    font-family: Arial, sans-serif;
 }
 
 .form-group label>span {
@@ -75,10 +81,7 @@ body {
 	font-size:16px;
 }
 
-.form-group .form-group-btn{
-	  padding-right: 10px;
-	
-}
+
 
 .form-group button {
 	 /* float: right; */
@@ -95,6 +98,14 @@ body {
     background-color: #EBEBEB;
     border-color: #ADADAD;
 }
+.form-group .btn-submit{
+	    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+	
+}
+
+
 
 /***				===
 	List-group
