@@ -76,7 +76,9 @@ body {
 }
 
 .form-group button {
-	 /* float: right; */
+    /* position: absolute; */
+	 float: right;
+    /* right: 20%; */
     background: #FFF;
     border: 1px solid #CCC;
     padding: 10px 25px 10px 25px;

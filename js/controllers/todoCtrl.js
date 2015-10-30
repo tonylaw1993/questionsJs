@@ -50,6 +50,8 @@ $scope.todos = $firebaseArray(query);
 
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
+// checker for posting
+$scope.postable = true;
 
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
@@ -91,11 +93,17 @@ $scope.$watchCollection('todos', function () {
 }, true);
 
 $scope.addTodo = function () {
+   if ($scope.input == undefined || $scope.input.wholeMsg == undefined || $scope.input.head == undefined){
+        $scope.postable = false;
+        return;
+    }
 	var inputMsg = $scope.input.wholeMsg;
+   var title = $scope.input.head.trim();
 	// If there is only emoji or no message is input, just do nothing
 	if (inputMsg === undefined){
 		return;
 	}
+   
 	var newTodo = inputMsg.trim();
 	/*
 	// No input, so just do nothing
@@ -103,7 +111,7 @@ $scope.addTodo = function () {
 		return;
 	}
 	*/
-	var title = $scope.input.head.trim();
+	
 	
 	$scope.todos.$add({
 		wholeMsg: newTodo,

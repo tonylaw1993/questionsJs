@@ -91,7 +91,7 @@
 				<h2>Ask a Question</h2>
 				<div class="">
 				<label>Title :</label>
-				<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />	
+				<input type="text" class="form-control" ng-model="input.head" required placeholder="Enter Your Question Title" ng-minlength="3" />	
 	         </div>
             <div class="">
 				<label>Content :</label>
@@ -102,6 +102,7 @@
             </div>
 				<button class="btn btn-default" type="submit">Ask</button>
 				<button class="btn btn-default" id="emoji" ng-disabled="!mobile">Add Emoji</button>
+            <div ng-show="!postable" class="alert alert-danger" role="alert">Title/Content must have more than 3 characters!</div>
 			</form>
         </div>		
 	</div> <!-- /form-group -->
@@ -144,16 +145,11 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 					<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">Unlike <span class="badge">{{todo.echo}}</span></button>
 					<button class="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">Dislike <span class="badge">{{todo.dislike}}</span></button>
 					<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">Un-Dislike <span class="badge">{{todo.dislike}}</span></button>
-<<<<<<< HEAD
-					<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
+
 					posted: <span am-time-ago="todo.timestamp"></span>
-=======
-					
-					created: <span am-time-ago="todo.timestamp"></span>
+                &nbsp;
                <span ng-show="todo.tags">tags: {{todo.tags}}</span>
->>>>>>> origin/gh-pages
-					&nbsp;
-					<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+		
 			</span>
 		</div>
 	</div><!-- /list-group -->
@@ -234,30 +230,9 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <script src="js/directives/todoEscape.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 
-<<<<<<< HEAD
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
-
-		<script>
-			$(document).ready(function(e) {
-				$('#new-todo').emojiPicker({
-					width: '300px',
-					height: '200px',
-					button: false
-				});
-				
-				$('#emoji').click(function(e) {
-					e.preventDefault();
-					$('#new-todo').emojiPicker('toggle');
-					$('.emojiPicker').css("left","175px");
-				});
-			
-			
-				$('a[href*=#]').bind("click", function(e){
-           
-			
-=======
 <script>
 	$(document).ready(function(e) {
 		$('#new-todo').emojiPicker({
@@ -273,7 +248,6 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 		});
 		
 		$('a[href*=#]').bind("click", function(e){         			
->>>>>>> origin/gh-pages
 				$('html, body').stop().animate({
 					scrollTop: 0
 					}, 1000);
@@ -286,14 +260,11 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 					} else {
 						$('.scroll-up').fadeOut();
 					}
-<<<<<<< HEAD
+
 				});
 			
-			
-=======
-				});		
-        });
->>>>>>> origin/gh-pages
+		});		
+					
 </script>
 </body>
 </html>
