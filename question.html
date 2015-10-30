@@ -230,7 +230,6 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <script src="js/directives/todoEscape.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 
-<<<<<<< HEAD
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
@@ -248,54 +247,22 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 			$('.emojiPicker').css("left","175px");
 		});
 		
-		$('a[href*=#]').bind("click", function(e){         			
-=======
+		$('a[href*=#]').bind("click", function(e){
+			$('html, body').stop().animate({
+				scrollTop: 0
+				}, 1000);
+				e.preventDefault();
+			});
 
-<!-- Javascript files .Font -->
-<script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 100) {
+					$('.scroll-up').fadeIn();
+				} else {
+					$('.scroll-up').fadeOut();
+				}
+			});
 
-
-		<script>
-			$(document).ready(function(e) {
-				$('#new-todo').emojiPicker({
-					width: '300px',
-					height: '200px',
-					button: false
-				});
-				$('#emoji').click(function(e) {
-					e.preventDefault();
-					$('#new-todo').emojiPicker('toggle');
-				});
-			
-			
-				$('a[href*=#]').bind("click", function(e){
-
->>>>>>> 05ce142ef728fd803c1ef3e1e7172e711b5809ce
-				$('html, body').stop().animate({
-					scrollTop: 0
-					}, 1000);
-					e.preventDefault();
-				});
-
-				$(window).scroll(function() {
-					if ($(this).scrollTop() > 100) {
-						$('.scroll-up').fadeIn();
-					} else {
-						$('.scroll-up').fadeOut();
-					}
-
-				});
-			
-<<<<<<< HEAD
-		});		
-					
-=======
-			
-
-					
-        });
-
->>>>>>> 05ce142ef728fd803c1ef3e1e7172e711b5809ce
+	});					
 </script>
 </body>
 </html>
