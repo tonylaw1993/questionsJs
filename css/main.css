@@ -75,8 +75,14 @@ body {
 	font-size:16px;
 }
 
+.form-group .form-group-btn{
+	  padding-right: 10px;
+	
+}
+
 .form-group button {
 	 /* float: right; */
+	 
     background: #FFF;
     border: 1px solid #CCC;
     padding: 10px 25px 10px 25px;
@@ -84,7 +90,7 @@ body {
     border-radius: 4px;
 }
 .form-group button:hover {
-	float: right;
+	/* float: right;*/
     color: #333;
     background-color: #EBEBEB;
     border-color: #ADADAD;
