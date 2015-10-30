@@ -149,7 +149,7 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 					posted: <span am-time-ago="todo.timestamp"></span>
                 &nbsp;
                <span ng-show="todo.tags">tags: {{todo.tags}}</span>
-		
+
 			</span>
 		</div>
 	</div><!-- /list-group -->
@@ -230,6 +230,7 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <script src="js/directives/todoEscape.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
@@ -248,6 +249,28 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 		});
 		
 		$('a[href*=#]').bind("click", function(e){         			
+=======
+
+<!-- Javascript files .Font -->
+<script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
+
+
+		<script>
+			$(document).ready(function(e) {
+				$('#new-todo').emojiPicker({
+					width: '300px',
+					height: '200px',
+					button: false
+				});
+				$('#emoji').click(function(e) {
+					e.preventDefault();
+					$('#new-todo').emojiPicker('toggle');
+				});
+			
+			
+				$('a[href*=#]').bind("click", function(e){
+
+>>>>>>> 05ce142ef728fd803c1ef3e1e7172e711b5809ce
 				$('html, body').stop().animate({
 					scrollTop: 0
 					}, 1000);
@@ -263,8 +286,16 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 
 				});
 			
+<<<<<<< HEAD
 		});		
 					
+=======
+			
+
+					
+        });
+
+>>>>>>> 05ce142ef728fd803c1ef3e1e7172e711b5809ce
 </script>
 </body>
 </html>
