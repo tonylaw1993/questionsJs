@@ -86,28 +86,24 @@
 <!--<button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>-->
 <!--</div> -->
 	<div class="container">
-		<div class="form-group">
+	    <div class="form-group">	
 			<form id="todo-form" ng-submit="addTodo()">
 				<h2>Ask a Question</h2>
-				
-				<label>
-					<span>Title :</span>
-					<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />
-				</label>
-						
-				<label>
-					<span>Content :</span>
-					<textarea  type="text" id="new-todo" class="form-control"
+				<div class="">
+				<label>Title :</label>
+				<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />	
+	         </div>
+            <div class="">
+				<label>Content :</label>
+				<textarea  type="text" id="new-todo" class="form-control"
 					placeholder="Search or Question Content"
-					ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!"></textarea>
-				</label> 
-				
-				<span class="form-group-btn">
-					<button class="btn btn-default" type="submit">Ask</button>
-					<button class="btn btn-default" id="emoji" ng-disabled="!mobile">Add Emoji</button>
-				</span>
+					ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!">
+            </textarea>
+            </div>
+				<button class="btn btn-default" type="submit">Ask</button>
+				<button class="btn btn-default" id="emoji" ng-disabled="!mobile">Add Emoji</button>
 			</form>
-		</div>
+        </div>		
 	</div> <!-- /form-group -->
 	
 	
@@ -142,14 +138,20 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 				</h4>
 					<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
 		
-			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
+			
 
 					<button class="btn btn-success btn-sm glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">Like <span class="badge">{{todo.echo}}</span></button>
 					<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">Unlike <span class="badge">{{todo.echo}}</span></button>
 					<button class="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">Dislike <span class="badge">{{todo.dislike}}</span></button>
 					<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">Un-Dislike <span class="badge">{{todo.dislike}}</span></button>
+<<<<<<< HEAD
 					<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
 					posted: <span am-time-ago="todo.timestamp"></span>
+=======
+					
+					created: <span am-time-ago="todo.timestamp"></span>
+               <span ng-show="todo.tags">tags: {{todo.tags}}</span>
+>>>>>>> origin/gh-pages
 					&nbsp;
 					<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
 			</span>
@@ -232,6 +234,7 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <script src="js/directives/todoEscape.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
@@ -254,6 +257,23 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 				$('a[href*=#]').bind("click", function(e){
            
 			
+=======
+<script>
+	$(document).ready(function(e) {
+		$('#new-todo').emojiPicker({
+			width: '300px',
+			height: '200px',
+			button: false
+		});
+			
+		$('#emoji').click(function(e) {
+			e.preventDefault();
+			$('#new-todo').emojiPicker('toggle');
+			$('.emojiPicker').css("left","175px");
+		});
+		
+		$('a[href*=#]').bind("click", function(e){         			
+>>>>>>> origin/gh-pages
 				$('html, body').stop().animate({
 					scrollTop: 0
 					}, 1000);
@@ -266,9 +286,14 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 					} else {
 						$('.scroll-up').fadeOut();
 					}
+<<<<<<< HEAD
 				});
 			
 			
+=======
+				});		
+        });
+>>>>>>> origin/gh-pages
 </script>
 </body>
 </html>

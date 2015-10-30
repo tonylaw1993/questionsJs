@@ -22,7 +22,7 @@ module.exports = function(config) {
       'js/**/*.js',
 
       'test/unit/*.js',
-			'node_modules/mockfirebase/browser/*.js'
+		//'node_modules/mockfirebase/browser/*.js'
     ],
 
 
