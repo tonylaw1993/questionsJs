@@ -144,12 +144,12 @@
 						<div class="col-xs-12 ">
 							<tt>posted: <span am-time-ago="todo.timestamp"></span> </tt>
 						
-							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked"><i class="fa fa-thumbs-o-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
-							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked"><i class="fa fa-thumbs-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
+							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked"><i class="fa fa-thumbs-o-up"></i>Like <span class="badge alert-info">{{todo.echo}}</span></button>
+							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked"><i class="fa fa-thumbs-up"></i>Like <span class="badge alert-info">{{todo.echo}}</span></button>
 					
 										
-							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked"><i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
-							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked"><i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
+							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked"><i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge alert-info">{{todo.dislike}}</span></button>
+							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked"><i class="fa fa-thumbs-down"></i>Dislike <span class="badge alert-info">{{todo.dislike}}</span></button>
 
                      <button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
                      <tt><span ng-show="todo.tags">tags: {{todo.tags}}</span></tt>
