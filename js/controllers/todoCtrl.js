@@ -134,6 +134,7 @@ $scope.addTodo = function () {
                       };
         });
 	// remove the posted question in the input
+   $scope.postable = true;
 	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
 };
