@@ -44,9 +44,15 @@ body {
 
 
 
-.form-group label {
-    display: block;
-    margin: 0px 0px 5px;
+.form-group .form-group-title label , .form-group .form-group-content  label {
+    float: left;
+    width: 100%;
+    text-align: left;
+    padding-right: 10px;
+    margin-top: 10px;
+    color: #333;
+	 font-size:18px;
+    font-family: Arial, sans-serif;
 }
 
 .form-group label>span {
@@ -56,7 +62,7 @@ body {
     padding-right: 10px;
     margin-top: 10px;
     color: #333;
-	font-size:18px;
+	 font-size:18px;
     font-family: Arial, sans-serif;
     
 }
@@ -65,18 +71,21 @@ body {
     height:28px;
     padding: 5px 0px 0px 5px;
     width: 100%;
-	font-size:16px;
+	 font-size:16px;
+	 display: -moz-box;
 }
 
 .form-group textarea{
     height:150px;
     padding: 5px 0px 0px 5px;
     width: 100%;
-	font-size:16px;
+	 font-size:16px;
+	 display: -moz-box;
 }
 
 .form-group .form-group-btn{
-	  padding-right: 10px;
+	 margin-top: 5px;
+	 margin-bottom: 5px;
 	
 }
 
@@ -94,6 +103,14 @@ body {
     background-color: #EBEBEB;
     border-color: #ADADAD;
 }
+.form-group .btn-submit{
+	 color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+	
+}
+
+
 
 /***				===
 	List-group
@@ -103,7 +120,7 @@ body {
 .list-group h3 {
     font: 22px "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: block;
-	padding-right: 10px;
+	 padding-right: 10px;
     padding-left: 10px;
     
 }
@@ -122,9 +139,15 @@ body {
 	
     font-family: 'Inconsolata';
     font-size:18px;
-	padding-right: 10px;
-    padding-left: 10px;
+	 padding-right: 10px;
+    padding-left: 20px;
     
+}
+
+.list-group #list-footer {
+	 padding-left: 15px;
+	
+	
 }
 
 
