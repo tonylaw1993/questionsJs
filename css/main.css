@@ -45,13 +45,13 @@ body {
 
 
 .form-group .form-group-title label , .form-group .form-group-content  label {
-     float: left;
+    float: left;
     width: 100%;
     text-align: left;
     padding-right: 10px;
     margin-top: 10px;
     color: #333;
-	font-size:18px;
+	 font-size:18px;
     font-family: Arial, sans-serif;
 }
 
@@ -62,7 +62,7 @@ body {
     padding-right: 10px;
     margin-top: 10px;
     color: #333;
-	font-size:18px;
+	 font-size:18px;
     font-family: Arial, sans-serif;
     
 }
@@ -71,27 +71,26 @@ body {
     height:28px;
     padding: 5px 0px 0px 5px;
     width: 100%;
-	font-size:16px;
-	display: -moz-box;
+	 font-size:16px;
+	 display: -moz-box;
 }
 
 .form-group textarea{
     height:150px;
     padding: 5px 0px 0px 5px;
     width: 100%;
-	font-size:16px;
-	display: -moz-box;
+	 font-size:16px;
+	 display: -moz-box;
 }
 
 .form-group .form-group-btn{
-	margin-top: 5px;
-	margin-bottom: 5px;
+	 margin-top: 5px;
+	 margin-bottom: 5px;
 	
 }
 
 .form-group button {
-	 /* float: right; */
-	 
+	 float: right;
     background: #FFF;
     border: 1px solid #CCC;
     padding: 10px 25px 10px 25px;
@@ -105,7 +104,7 @@ body {
     border-color: #ADADAD;
 }
 .form-group .btn-submit{
-	    color: #fff;
+	 color: #fff;
     background-color: #5bc0de;
     border-color: #46b8da;
 	
@@ -121,7 +120,7 @@ body {
 .list-group h3 {
     font: 22px "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: block;
-	padding-right: 10px;
+	 padding-right: 10px;
     padding-left: 10px;
     
 }
@@ -140,13 +139,13 @@ body {
 	
     font-family: 'Inconsolata';
     font-size:18px;
-	padding-right: 10px;
+	 padding-right: 10px;
     padding-left: 20px;
     
 }
 
 .list-group #list-footer {
-	padding-left: 15px;
+	 padding-left: 15px;
 	
 	
 }

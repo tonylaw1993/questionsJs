@@ -91,10 +91,12 @@
 			<form id="todo-form" ng-submit="addTodo()">
 			
 				<h2>Ask a Question</h2>
-				
+		
 				<div class="form-group-title">
 					<label>Title </label>
-					<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />	
+					<input type="text" class="form-control" 
+               ng-model="input.head" ng-minlength="3" required maxlength="1024" 
+               placeholder="Enter Your Question Title" />	
 				</div>
 				
 				<div class="form-group-content">
@@ -110,26 +112,11 @@
 				<button class="btn btn-submit" type="submit">Ask</button>
 				<button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
 				</div>
-				
+				<span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters!</span>
+
 			</form>
         </div>		
 	</div> <!-- /form-group -->
-	
-	
-	
-  <!--
-<div class="form-group">
-<form id="todo-form" ng-submit="addTodo()">
-<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" autofocus required maxlength="128" title="Please enter question title!"></input>
-<textarea type="text" id="new-todo" class="form-control"
-placeholder="Search or Question Content"
-ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!"></textarea>
-<span class="form-group-btn">
-	<button class="btn btn-default" type="submit">Ask</button>
-	<button class="btn btn-default" id="emoji" ng-disabled="!mobile">Add Emoji</button>
-</span>
-</form>
-</div><!-- /form-group -->
  
 	<div class="container">
 			
@@ -148,12 +135,9 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 						<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
 						<span class="label label-danger" ng-show="todo.latest">New</span>
 						<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
-						<span ng-show="todo.tags">tags: {{todo.tags}}</span>
+						
 
-							&nbsp;
-						<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-						</br>
-								
+			
 					</div>
 					
 					<div class="row" id="list-footer">
@@ -163,55 +147,18 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked"><i class="fa fa-thumbs-o-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
 							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked"><i class="fa fa-thumbs-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
 					
-						
-					
-						
-						
+										
 							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked"><i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
 							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked"><i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
+
+                     <button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+                     <tt><span ng-show="todo.tags">tags: {{todo.tags}}</span></tt>
 					
 						</div>
 					</div>
-					<!-- 
-							<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-							<span class="label label-danger" ng-show="todo.latest">New</span>
-								<span class="badge">{{todo.echo+todo.dislike}}</span>
-							</br>
-							<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
-						</h4>
-			<!-- switch -->
-			
-			
-			<!-- 
-			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
-			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-			
-			 
-			 
-			 
-			 
-						
-							<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
-		
+										
 			
 
-							<button class="btn btn-success btn-sm glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">Like <span class="badge">{{todo.echo}}</span></button>
-							<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">Unlike <span class="badge">{{todo.echo}}</span></button>
-							<button class="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">Dislike <span class="badge">{{todo.dislike}}</span></button>
-							<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">Un-Dislike <span class="badge">{{todo.dislike}}</span></button>
-
-							<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
-							posted: <span am-time-ago="todo.timestamp"></span>
-
-					
-					
-							<span ng-show="todo.tags">tags: {{todo.tags}}</span>
-
-							&nbsp;
-							<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
--->								
-			
-				</div>
 		</div>
 	</div><!-- /list-group -->
 	
@@ -291,46 +238,39 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 <script src="js/directives/todoEscape.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 
-
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
-
-		<script>
-			$(document).ready(function(e) {
-				$('#new-todo').emojiPicker({
-					width: '300px',
-					height: '200px',
-					button: false
-				});
-				$('#emoji').click(function(e) {
-					e.preventDefault();
-					$('#new-todo').emojiPicker('toggle');
-				});
+<script>
+	$(document).ready(function(e) {
+		$('#new-todo').emojiPicker({
+			width: '300px',
+			height: '200px',
+			button: false
+		});
 			
-			
-				$('a[href*=#]').bind("click", function(e){
+		$('#emoji').click(function(e) {
+			e.preventDefault();
+			$('#new-todo').emojiPicker('toggle');
+			$('.emojiPicker').css("left","175px");
+		});
+		
+		$('a[href*=#]').bind("click", function(e){
+			$('html, body').stop().animate({
+				scrollTop: 0
+				}, 1000);
+				e.preventDefault();
+			});
 
-				$('html, body').stop().animate({
-					scrollTop: 0
-					}, 1000);
-					e.preventDefault();
-				});
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 100) {
+					$('.scroll-up').fadeIn();
+				} else {
+					$('.scroll-up').fadeOut();
+				}
+			});
 
-				$(window).scroll(function() {
-					if ($(this).scrollTop() > 100) {
-						$('.scroll-up').fadeIn();
-					} else {
-						$('.scroll-up').fadeOut();
-					}
-
-				});
-			
-			
-
-					
-        });
-
+	});					
 </script>
 </body>
 </html>
