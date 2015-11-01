@@ -81,7 +81,11 @@ body {
 	font-size:16px;
 }
 
-
+.form-group .form-group-btn{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+}
 
 .form-group button {
 	 /* float: right; */
@@ -135,8 +139,14 @@ body {
     font-family: 'Inconsolata';
     font-size:18px;
 	padding-right: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
     
+}
+
+.list-group #list-footer {
+	padding-left: 15px;
+	
+	
 }
 
 

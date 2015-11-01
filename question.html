@@ -22,7 +22,8 @@
 	<!-- Font CSS -->
 	<link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
 	<link href='https://fonts.googleapis.com/css?family=Crete+Round:400,400italic|Inconsolata' rel='stylesheet' type='text/css'>
-
+	<link rel="stylesheet" href="fonts/font-awesome-4.4.0/css/font-awesome.min.css">
+	
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
 	<link rel="stylesheet" href="css/main.css">
 	
@@ -92,19 +93,23 @@
 				<h2>Ask a Question</h2>
 				
 				<div class="form-group-title">
-					<label>Title :</label>
+					<label>Title </label>
 					<input type="text" class="form-control" ng-model="input.head" placeholder="Enter Your Question Title" />	
 				</div>
 				
 				<div class="form-group-content">
-					<label>Content :</label>
+					<label>Content </label>
 					<textarea  type="text" id="new-todo" class="form-control"
 					placeholder="Search or Question Content"
-					ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!">
+					ng-model="input.wholeMsg" 
+					required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!"
+					>
 					</textarea>
 				</div>
+				<div class = "form-group-btn">
 				<button class="btn btn-submit" type="submit">Ask</button>
 				<button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
+				</div>
 				
 			</form>
         </div>		
@@ -134,10 +139,46 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 			<span class="list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:todos.length " ng-class="{completed: todo.completed, editing: todo == editedTodo}">
 				
 				
-				<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-					<span class="label label-danger" ng-show="todo.latest">New</span>
-					<span class="badge">{{todo.echo+todo.dislike}}</span>
-					</br>
+				<div class="row" id="">
+					
+					
+					
+					<div class="col-xs-12">
+						<span class="badge">{{todo.echo+todo.dislike}}</span>
+						<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
+						<span class="label label-danger" ng-show="todo.latest">New</span>
+						<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
+						<span ng-show="todo.tags">tags: {{todo.tags}}</span>
+
+							&nbsp;
+						<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+						</br>
+								
+					</div>
+					
+					<div class="row" id="list-footer">
+						<div class="col-xs-12 ">
+							<tt>posted: <span am-time-ago="todo.timestamp"></span> </tt>
+						
+							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked"><i class="fa fa-thumbs-o-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
+							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked"><i class="fa fa-thumbs-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
+					
+						
+					
+						
+						
+							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked"><i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
+							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked"><i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
+					
+						</div>
+					</div>
+					<!-- 
+							<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
+							<span class="label label-danger" ng-show="todo.latest">New</span>
+								<span class="badge">{{todo.echo+todo.dislike}}</span>
+							</br>
+							<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
+						</h4>
 			<!-- switch -->
 			
 			
@@ -145,28 +186,32 @@ ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Plea
 			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
 			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 			
-			 -->
-			<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
-				</h4>
-					<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
+			 
+			 
+			 
+			 
+						
+							<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
 		
 			
 
-					<button class="btn btn-success btn-sm glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">Like <span class="badge">{{todo.echo}}</span></button>
-					<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">Unlike <span class="badge">{{todo.echo}}</span></button>
-					<button class="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">Dislike <span class="badge">{{todo.dislike}}</span></button>
-					<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">Un-Dislike <span class="badge">{{todo.dislike}}</span></button>
+							<button class="btn btn-success btn-sm glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">Like <span class="badge">{{todo.echo}}</span></button>
+							<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">Unlike <span class="badge">{{todo.echo}}</span></button>
+							<button class="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">Dislike <span class="badge">{{todo.dislike}}</span></button>
+							<button class="btn btn-default btn-sm glyphicon glyphicon-remove" ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">Un-Dislike <span class="badge">{{todo.dislike}}</span></button>
 
-					<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
-					posted: <span am-time-ago="todo.timestamp"></span>
+							<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
+							posted: <span am-time-ago="todo.timestamp"></span>
 
 					
 					
-               <span ng-show="todo.tags">tags: {{todo.tags}}</span>
+							<span ng-show="todo.tags">tags: {{todo.tags}}</span>
 
-					&nbsp;
-					<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-			</span>
+							&nbsp;
+							<button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+-->								
+			
+				</div>
 		</div>
 	</div><!-- /list-group -->
 	
