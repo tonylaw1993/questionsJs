@@ -111,8 +111,9 @@
 				<div class = "form-group-btn">
 				<button class="btn btn-submit" type="submit">Ask</button>
 				<button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
+            <span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters!</span>
 				</div>
-				<span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters!</span>
+				
 
 			</form>
         </div>		
@@ -252,7 +253,7 @@
 		$('#emoji').click(function(e) {
 			e.preventDefault();
 			$('#new-todo').emojiPicker('toggle');
-			$('.emojiPicker').css("left","175px");
+			$('.emojiPicker').css("left","275px");
 		});
 		
 		$('a[href*=#]').bind("click", function(e){
