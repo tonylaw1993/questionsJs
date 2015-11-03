@@ -42,51 +42,30 @@
 		
  <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Questions Room: <tt>{{roomId}}</tt></a>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Questions Room: <tt>{{roomId}}</tt></a>
+                
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="" ng-hide="$authData"   ng-click="FBLogin()" >Login</a></li>
+                    <li><a href="" ng-show="$authData"   ng-click="FBLogout()">Logout</a></li>
+                    <li><img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</li>
+			
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-         
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="" ng-hide="$authData"   ng-click="FBLogin()" >Login</a></li>
-            <li><a href="" ng-show="$authData"   ng-click="FBLogout()">Logout</a></li>
-			<li><img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
-			{{$authData.facebook.displayName}}</li>
-
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
     </nav>
-
-	<!--<font size="10">Questions Room: {{roomId}}?</font>&nbsp;-->
-
-	<!--
-	<a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
-	<a ng-class="{selected: location.path() == '/tags'}" class="btn btn-success" href="#/tags">Tags</a>
-	<a ng-class="{selected: location.path() == '/users'}" class="btn btn-info" href="#/users">Users</a>
-	<a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
--->
-
-
-<!--<small>Share room url: {{absurl}}</small> &nbsp;-->
-<!--<div class="header">-->
-<!--<a class="btn btn-default" href="index.html">Main</a>-->
-<!--<button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Want Admin? Sign in with Facebook</button>-->
-
-<!-- after login -->
-<!--<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />-->
-<!--{{$authData.facebook.displayName}}-->
-<!--<button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>-->
-<!--</div> -->
-	<div class="container">
+    
+    <div class="container">
 	    <div class="form-group">	
 			<form id="todo-form" ng-submit="addTodo()">
 			
@@ -95,8 +74,8 @@
 				<div class="form-group-title">
 					<label>Title </label>
 					<input type="text" class="form-control" 
-               ng-model="input.head" ng-minlength="3" required maxlength="1024" 
-               placeholder="Enter Your Question Title" />	
+					ng-model="input.head" ng-minlength="3" required maxlength="1024" 
+					placeholder="Enter Your Question Title" />	
 				</div>
 				
 				<div class="form-group-content">
@@ -109,12 +88,11 @@
 					</textarea>
 				</div>
 				<div class = "form-group-btn">
-				<button class="btn btn-submit" type="submit">Ask</button>
-				<button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
-            <span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters!</span>
+				    <button class="btn btn-submit" type="submit">Ask</button>
+				    <button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
+                <span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters!</span>
 				</div>
 				
-
 			</form>
         </div>		
 	</div> <!-- /form-group -->
@@ -125,32 +103,30 @@
 			<h3>Question Lists</h3>
 			
 			<span class="list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:todos.length " ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-				
-				
+					
 				<div class="row" id="">
-					
-					
-					
+			
 					<div class="col-xs-12">
 						<span class="badge">{{todo.echo+todo.dislike}}</span>
 						<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
 						<span class="label label-danger" ng-show="todo.latest">New</span>
 						<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
-						
 
-			
 					</div>
 					
 					<div class="row" id="list-footer">
 						<div class="col-xs-12 ">
 							<tt>posted: <span am-time-ago="todo.timestamp"></span> </tt>
 						
-							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked"><i class="fa fa-thumbs-o-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
-							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked"><i class="fa fa-thumbs-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
-					
-										
-							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked"><i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
-							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked"><i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
+							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">
+							<i class="fa fa-thumbs-o-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
+							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">
+							<i class="fa fa-thumbs-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
+									
+							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">
+							<i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
+							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">
+							<i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
 
                      <button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
                      <tt><span ng-show="todo.tags">tags: {{todo.tags}}</span></tt>

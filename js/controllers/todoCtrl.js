@@ -93,25 +93,14 @@ $scope.$watchCollection('todos', function () {
 }, true);
 
 $scope.addTodo = function () {
-   if ($scope.input == undefined || $scope.input.wholeMsg == undefined || $scope.input.head == undefined){
+    // If there is only emoji or no message is input, just do nothing
+    if ($scope.input == undefined || $scope.input.wholeMsg == undefined || $scope.input.head == undefined){
         $scope.postable = false;
         return;
-    }
+        }
 	var inputMsg = $scope.input.wholeMsg;
    var title = $scope.input.head.trim();
-	// If there is only emoji or no message is input, just do nothing
-	if (inputMsg === undefined){
-		return;
-	}
-   
 	var newTodo = inputMsg.trim();
-	/*
-	// No input, so just do nothing
-	if (!newTodo.length) {
-		return;
-	}
-	*/
-	
 	
 	$scope.todos.$add({
 		wholeMsg: newTodo,
@@ -133,15 +122,16 @@ $scope.addTodo = function () {
                        disliked: false
                       };
         });
-	// remove the posted question in the input
+	// keep the state of postable to subpress the warning message
    $scope.postable = true;
+   // remove the posted question in the input
 	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
 };
 
 $scope.editTodo = function (todo) {
-	$scope.editedTodo = todo;
-	$scope.originalTodo = angular.extend({}, $scope.editedTodo);
+    $scope.editedTodo = todo;
+    $scope.originalTodo = angular.extend({}, $scope.editedTodo);
 };
 
 $scope.addEcho = function (todo) {
@@ -193,92 +183,92 @@ $scope.addDislike = function (todo) {		// +1 dislike
 };
 
 $scope.minEcho = function (todo) {
-	$scope.editedTodo = todo;
-	todo.echo = todo.echo - 1;
-	$scope.todos.$save(todo);
-	// Change the like button
-	$scope.$storage[todo.$id].liked = false;
+    $scope.editedTodo = todo;
+    todo.echo = todo.echo - 1;
+    $scope.todos.$save(todo);
+    // Change the like button
+    $scope.$storage[todo.$id].liked = false;
 };
 
 $scope.minDislike = function (todo) {		// -1 dislike
-	$scope.editedTodo = todo;
-	todo.dislike = todo.dislike - 1;
-	$scope.todos.$save(todo);
-	// Change the dislike button
-	$scope.$storage[todo.$id].disliked = false;
+    $scope.editedTodo = todo;
+    todo.dislike = todo.dislike - 1;
+    $scope.todos.$save(todo);
+    // Change the dislike button
+    $scope.$storage[todo.$id].disliked = false;
 };
 
 $scope.doneEditing = function (todo) {
-	$scope.editedTodo = null;
-	var wholeMsg = todo.wholeMsg.trim();
-	if (wholeMsg) {
-		$scope.todos.$save(todo);
-	} else {
-		$scope.removeTodo(todo);
-	}
+    $scope.editedTodo = null;
+    var wholeMsg = todo.wholeMsg.trim();
+    if (wholeMsg) {
+        $scope.todos.$save(todo);
+    } else {
+        $scope.removeTodo(todo);
+    }
 };
 
 $scope.revertEditing = function (todo) {
-	todo.wholeMsg = $scope.originalTodo.wholeMsg;
-	$scope.doneEditing(todo);
+    todo.wholeMsg = $scope.originalTodo.wholeMsg;
+    $scope.doneEditing(todo);
 };
 
 $scope.removeTodo = function (todo) {
-	$scope.todos.$remove(todo);
+    $scope.todos.$remove(todo);
 };
 
 $scope.FBLogin = function () {
-	var ref = new Firebase(firebaseURL);
-	ref.authWithOAuthPopup("facebook", function(error, authData) {
-		if (error) {
-			console.log("Login Failed!", error);
-		} else {
-			$scope.$apply(function() {
-				$scope.$authData = authData;
-				$scope.isAdmin = true;
-			});
-			console.log("Authenticated successfully with payload:", authData);
-		}
-	});
+    var ref = new Firebase(firebaseURL);
+    ref.authWithOAuthPopup("facebook", function(error, authData) {
+    if (error) {
+        console.log("Login Failed!", error);
+    } else {
+        $scope.$apply(function() {
+        $scope.$authData = authData;
+        $scope.isAdmin = true;
+        });
+    console.log("Authenticated successfully with payload:", authData);
+    }
+    });
 };
 
 $scope.FBLogout = function () {
-	var ref = new Firebase(firebaseURL);
-	ref.unauth();
-	delete $scope.$authData;
-	$scope.isAdmin = false;
+    var ref = new Firebase(firebaseURL);
+    ref.unauth();
+    delete $scope.$authData;
+    $scope.isAdmin = false;
 };
 
 $scope.increaseMax = function () {
-	if ($scope.maxQuestion < $scope.totalCount) {
-		$scope.maxQuestion+=scrollCountDelta;
-	}
+    if ($scope.maxQuestion < $scope.totalCount) {
+        $scope.maxQuestion+=scrollCountDelta;
+    }
 };
 
 $scope.toTop =function toTop() {
-	$window.scrollTo(0,0);
+    $window.scrollTo(0,0);
 };
 
 
 // Not sure what is this code. Todel
 if ($location.path() === '') {
-	$location.path('/');
+    $location.path('/');
 }
 $scope.location = $location;
 
 // autoscroll
 angular.element($window).bind("scroll", function() {
-	if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
-		console.log('Hit the bottom2. innerHeight' +
-		$window.innerHeight + "scrollY" +
-		$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
+    if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
+        console.log('Hit the bottom2. innerHeight' +
+        $window.innerHeight + "scrollY" +
+        $window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
 
-		// update the max value
-		$scope.increaseMax();
+        // update the max value
+        $scope.increaseMax();
 
-		// force to update the view (html)
-		$scope.$apply();
-	}
+        // force to update the view (html)
+        $scope.$apply();
+    }
 });
 
 }]);
