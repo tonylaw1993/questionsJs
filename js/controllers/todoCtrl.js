@@ -9,10 +9,11 @@
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window', '$sanitize',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sanitize) {
-	// set local storage
-	$scope.$storage = $localStorage;
+    // set local storage
+    $scope.$storage = $localStorage;
 
-
+    
+    
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
 
@@ -26,14 +27,21 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
         });
         */
 
-        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                $scope.mobile = true;
-           }
-var splits = $location.path().trim().split("/");
-var roomId = angular.lowercase(splits[1]);
-if (!roomId || roomId.length === 0) {
-	roomId = "all";
-}
+    if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $scope.mobile = true;
+        }
+    var splits = $location.path().trim().split("/");
+    var roomId = angular.lowercase(splits[1]);
+    if (!roomId || roomId.length === 0) {
+	    roomId = "all";
+    }
+
+    $scope.pages = [
+        {name: 'Question', url: 'qa.html', selected: false},
+        {name: 'Poll', url: 'poll.html', selected: false}
+    ];
+    $scope.page = $scope.pages[0];
+    $scope.page.selected = true;
 
 // TODO: Please change this URL for your app
 var firebaseURL = "https://scorching-inferno-6291.firebaseio.com/";
@@ -249,6 +257,14 @@ $scope.toTop =function toTop() {
     $window.scrollTo(0,0);
 };
 
+// Page changes
+$scope.changePage = function(id){
+    $scope.pages.forEach(function (page){
+        page.selected = false;
+    });
+    $scope.page = $scope.pages[id];
+    $scope.page.selected = true;
+}
 
 // Not sure what is this code. Todel
 if ($location.path() === '') {

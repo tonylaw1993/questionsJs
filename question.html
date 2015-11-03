@@ -54,6 +54,10 @@
                 
             </div>
             <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li ng-model="page" ng-repeat="page in pages" ng-class="{active:page.selected}">
+                    <a href="" ng-click="changePage($index)">{{ page.name }}</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="" ng-hide="$authData"   ng-click="FBLogin()" >Login</a></li>
@@ -65,79 +69,9 @@
         </div>
     </nav>
     
-    <div class="container">
-	    <div class="form-group">	
-			<form id="todo-form" ng-submit="addTodo()">
-			
-				<h2>Ask a Question</h2>
-		
-				<div class="form-group-title">
-					<label>Title </label>
-					<input type="text" class="form-control" 
-					ng-model="input.head" ng-minlength="3" required maxlength="1024" 
-					placeholder="Enter Your Question Title" />	
-				</div>
-				
-				<div class="form-group-content">
-					<label>Content </label>
-					<textarea  type="text" id="new-todo" class="form-control"
-					placeholder="Search or Question Content"
-					ng-model="input.wholeMsg" 
-					required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!"
-					>
-					</textarea>
-				</div>
-				<div class = "form-group-btn">
-				    <button class="btn btn-submit" type="submit">Ask</button>
-				    <button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
-                <span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters!</span>
-				</div>
-				
-			</form>
-        </div>		
-	</div> <!-- /form-group -->
- 
-	<div class="container">
-			
-		<div class="list-group" id="todo-list">
-			<h3>Question Lists</h3>
-			
-			<span class="list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:todos.length " ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-					
-				<div class="row" id="">
-			
-					<div class="col-xs-12">
-						<span class="badge">{{todo.echo+todo.dislike}}</span>
-						<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
-						<span class="label label-danger" ng-show="todo.latest">New</span>
-						<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
-
-					</div>
-					
-					<div class="row" id="list-footer">
-						<div class="col-xs-12 ">
-							<tt>posted: <span am-time-ago="todo.timestamp"></span> </tt>
-						
-							<button class="btn btn-link " ng-click="addEcho(todo)" ng-show="!$storage[todo.$id].liked">
-							<i class="fa fa-thumbs-o-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
-							<button class="btn btn-link " ng-click="minEcho(todo)" ng-show="$storage[todo.$id].liked">
-							<i class="fa fa-thumbs-up"></i>Like <span class="badge">{{todo.echo}}</span></button>
-									
-							<button class="btn btn-link " ng-click="addDislike(todo)" ng-show="!$storage[todo.$id].disliked">
-							<i class="fa fa-thumbs-o-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
-							<button class="btn btn-link " ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked">
-							<i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
-
-                     <button ng-show="isAdmin" class="btn btn-default btn-sm glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-                     <tt><span ng-show="todo.tags">tags: {{todo.tags}}</span></tt>
-					
-						</div>
-					</div>
-										
-			</span>
-
-		</div>
-	</div><!-- /list-group -->
+    
+    <div ng-include="page.url">
+    </div>
 	
 	
 	
@@ -177,6 +111,7 @@
 <script src="js/app.js"></script>
 <script src="js/filters/questionFilter.js"></script>
 <script src="js/controllers/todoCtrl.js"></script>
+<script src="js/controllers/pollCtrl.js"></script>
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
