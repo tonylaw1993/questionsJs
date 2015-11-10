@@ -95,6 +95,7 @@
         <div ng-repeat="item in poll.items">
         {{$index + 1}}: <span>{{item.option}}</span> Votes:<div class="progress"><div class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: 50%;"><span class="sr-only">60% Complete</span></div></div><span>{{item.vote}}</span>
         </div>
+        <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
         <hr>
         
     </div>
