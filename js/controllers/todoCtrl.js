@@ -100,7 +100,8 @@ $scope.addTodo = function () {
 	var inputMsg = $scope.input.wholeMsg;
    var title = $scope.input.head.trim();
 	// If there is only emoji or no message is input, just do nothing
-	if (inputMsg === undefined){
+	if (inputMsg === undefined || inputMsg == ""){
+	    $scope.postable = false;
 		return;
 	}
    
