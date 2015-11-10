@@ -53,7 +53,10 @@
           <a class="navbar-brand" href="#">Questions Room: <tt>{{roomId}}</tt></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-         
+          <ul class="nav navbar-nav navbar-left">
+            <li class=active><a href="">Question</a></li>
+            <li><a ng-href="poll.html#/{{roomId}}">Polling</a></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
             <li><a href="" ng-hide="$authData"   ng-click="FBLogin()" >Login</a></li>
@@ -223,7 +226,7 @@
 			$('.emojiPicker').css("left","275px");
 		});
 		
-		$('a[href*=#]').bind("click", function(e){
+		$('a[href*=top]').bind("click", function(e){
 			$('html, body').stop().animate({
 				scrollTop: 0
 				}, 1000);
