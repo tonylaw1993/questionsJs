@@ -20,7 +20,7 @@
     
        
 </head>
-<body ng-controller="controller">
+<body ng-controller="indexController">
 
 	<!-- Preloader -->
 
@@ -38,7 +38,7 @@
 				<h1 class=" title"> Room</h1>
 				
 				
-				<form name="form" ng-submit="join()" class="navbar-form navbar-left" role="search">
+				<form name="form" ng-submit="checkRoom()" class="navbar-form navbar-left" role="search">
 								<input type="text" name = "input" class="form-control large" ;
 								ng-model="example.text"
 								ng-pattern="example.word" required
@@ -49,11 +49,14 @@
 								
 								<a style="font-size:200%" class="btn_enter"
 								
-								ng-click="join()" 
+								ng-click="checkRoom()" 
 								>Enter</a>
 				</form>
+				
 		</div>
-
+        <div style="color: black;">
+				<span ng-repeat="room in roomList">{{room}}</span>
+			</div>
         <a href="#Popular">
 		<div class="scroll-down">
             <span>more
@@ -375,11 +378,17 @@
 	<script src="js/lib/modernizr.custom.js"></script>
 		
 	<script src="js/lib/angular.min.js"></script>
-
+   <script src="js/lib/ngStorage.min.js"></script>
 			<script>
-			angular.module('app', [])
-			.controller('controller', ['$scope', '$location', '$window', function($scope, $location, $window) {
-				
+			angular.module('app', ['ngStorage'])
+			.controller('indexController', ['$scope', '$location', '$window', '$localStorage', function($scope, $location, $window, $localStorage) {
+				// Initialize the localStorage
+				if ($localStorage.roomList == undefined){
+				    $localStorage.roomList = [];
+				    $scope.roomList = $localStorage.roomList;
+				} else{
+				    $scope.roomList = $localStorage.roomList;
+				}
 				$scope.data = {
 				text:''
 				
@@ -389,17 +398,31 @@
 					text: '',
 					word: /^\s*\w*\s*$/
 				};
-
+				
+            $scope.checkRoom = function (){
+                if ($scope.roomList.indexOf($scope.example.text) == -1){
+				            $scope.roomList.push($scope.example.text);
+				            $localStorage.roomList = $scope.roomList;
+				     }
+				     $scope.join();
+				     
+                };
+                
 				$scope.join = function () {
+				   
 					$window.location.href = 'question.html#/' + $scope.example.text;
-				}
+				};
 				
 				
 				
 				
 				$scope.submit = function () {
+				   if ($scope.roomList.indexOf($scope.data.text) == -1){
+				        $scope.roomList.push($scope.data.text);
+				        $localStorage.roomList = $scope.roomList;
+				   }
 					$window.location.href = 'question.html#/' + $scope.data.text;
-				}
+				};
 				
 			}]);
 			
