@@ -89,7 +89,6 @@ $scope.$watchCollection('todos', function () {
 	$scope.remainingCount = remaining;
 	$scope.completedCount = total - remaining;
 	$scope.allChecked = remaining === 0;
-	$scope.absurl = $location.absUrl();
 }, true);
 
 $scope.addTodo = function () {
@@ -260,12 +259,6 @@ $scope.toTop =function toTop() {
 	$window.scrollTo(0,0);
 };
 
-
-// Not sure what is this code. Todel
-if ($location.path() === '') {
-	$location.path('/');
-}
-$scope.location = $location;
 
 // autoscroll
 angular.element($window).bind("scroll", function() {
