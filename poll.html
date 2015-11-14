@@ -51,7 +51,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
             <li><a ng-href="question.html#/{{roomId}}">Question</a></li>
-            <li class=active><a href="">Polling</a></li>
+            <li class=active><a href="">Polling<span class="badge" style="background-color: red;">{{polls.length}}</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
@@ -79,7 +79,7 @@
                         </select>
                         </label>
                         <label>Options</label>
-                        <div ng-repeat="x in getOptions(numOfChoice) track by $index"><label>{{$index + 1}} <input ng-model="options[$index]"></input></label></div>
+                        <div ng-repeat="x in getOptions(numOfChoice) track by $index"><label>{{$index + 1}}. <input ng-model="options[$index]"></input></label></div>
                     </div>
                     <div class = "form-group-btn">
                         <button class="btn btn-submit" type="submit">Raise</button>
@@ -90,16 +90,28 @@
     </div>
     <div class="container"> <!-- Poll listing -->
     <h3>Poll List</h3>
-    <div ng-repeat="poll in polls">
-        <h4>{{poll.head}}</h4>
-        <div ng-repeat="item in poll.items">
-        {{$index + 1}}: <span>{{item.option}}</span> Votes:<div class="progress"><div class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: 50%;"><span class="sr-only">60% Complete</span></div></div><span>{{item.vote}}</span>
+    <div class="col-xs-6">
+    <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
+        <span class="label label-danger" ng-show="poll.latest">New</span><span class="title">{{poll.head}}</span>
+        <div ng-repeat="item in poll.items | limitTo: poll.items.length/2">
+        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
         </div>
         <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
         <hr>
         
     </div>
-    
+    </div>
+    <div class="col-xs-6">
+    <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
+        <span class="label label-danger" ng-show="poll.latest"></span><span class="title invisible">&nbsp;</span>
+        <div ng-repeat="item in poll.items | limitTo: poll.items.length/2 : poll.items.length/2">
+        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + poll.items.length/2 + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
+        </div>
+        <tt class="invisible">posted: </tt>
+        <hr>
+        
+    </div>
+    </div>
     </div>
 	
 	
@@ -134,7 +146,7 @@
 
 <!-- Javascript files -->
 <script src="js/app.js"></script>
-
+<script src="js/filters/pollFilter.js"></script>
 <script src="js/controllers/pollCtrl.js"></script>
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
@@ -143,6 +155,23 @@
 
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
+
+<script>
+$('a[href*=top]').bind("click", function(e){
+			$('html, body').stop().animate({
+				scrollTop: 0
+				}, 1000);
+				e.preventDefault();
+			});
+
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 100) {
+					$('.scroll-up').fadeIn();
+				} else {
+					$('.scroll-up').fadeOut();
+				}
+			});
+</script>
 
 </body>
 </html>

@@ -32,19 +32,28 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
     };
     $scope.head = "";
     $scope.postable = true;
+    $scope.editedPoll = null;
+    
     // pre-precessing for collection
     $scope.$watchCollection('polls', function () {
         var total = 0;
-        $scope.polls.forEach(function (todo) {
+        $scope.polls.forEach(function (poll) {
         // Skip invalid entries so they don't break the entire app.
-        if (!todo || !todo.head ) {
+        if (!poll || !poll.head ) {
             return;
             }
-
+        if ($scope.$storage[poll.$id] == undefined){
+            $scope.$storage[poll.$id] = {
+                voted: false
+                };
+            }
         total++;
 		
-        if (todo.timestamp <= new Date().getTime() - 180000) { // 3min
-            todo.latest = false;
+        if (poll.timestamp <= new Date().getTime() - 180000) { // 3min
+            poll.latest = false;
+            }
+        if (poll.totalVote == undefined){
+            poll.totalVote = 0;
             }
 	    });
     }, true);
@@ -64,11 +73,30 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
         $scope.polls.$add({
             head: title,
             timestamp: new Date().getTime(),
-            items: temp
+            items: temp,
+            totalVote: 0,
+            latest: true
+        }).then(function(ref){
+            var id = ref.key();
+            $scope.$storage[id] = {
+                owner: true,
+                voted: false
+            };
         });
         $scope.postable = true;
         // Remove the things added
         $scope.head = "";
     }
+    
+    $scope.addVote = function(){
+        if ($scope.$storage[this.$parent.poll.$id].voted == true){
+            return;
+        } else {
+            this.item.vote = this.item.vote + 1;
+            this.$parent.poll.totalVote = this.$parent.poll.totalVote + 1;
+            $scope.$storage[this.$parent.poll.$id].voted = true;
+            }
+        $scope.polls.$save(this.$parent.poll);
+    };
 
 }]);
