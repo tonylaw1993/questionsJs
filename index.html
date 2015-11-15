@@ -253,11 +253,11 @@
 			</div>
 
 			<div class="row">
-				<span ng-repeat="room in roomList">
+				<span ng-repeat="room in roomList" ng-click="submit(room)">
 				<div class="col-sm-3">
 					
-					<div class="iconbox wow slideInLeft">
-						<div class="iconbox-icon">
+					<div class="iconbox wow slideInLeft" >
+						<div class="iconbox-icon" >
 							<span class="icon-magic-wand"></span>
 						</div>
 						<div class="iconbox-text">
@@ -425,12 +425,13 @@
 				
 				
 				
-				$scope.submit = function () {
-				   if ($scope.roomList.indexOf($scope.data.text) == -1){
-				        $scope.roomList.push($scope.data.text);
+				$scope.submit = function (recentRoom) {
+				   if ($scope.roomList.indexOf(recentRoom) == -1){
+				        $scope.roomList.push(recentRoom);
 				        $localStorage.roomList = $scope.roomList;
 				   }
-					$window.location.href = 'question.html#/' + $scope.data.text;
+				   
+					$window.location.href = 'question.html#/' + recentRoom;
 				};
 				
 			}]);
