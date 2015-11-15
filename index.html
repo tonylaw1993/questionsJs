@@ -54,9 +54,12 @@
 				</form>
 				
 		</div>
-        <div style="color: black;">
-				<span ng-repeat="room in roomList">{{room}}</span>
-			</div>
+		
+		
+		
+			
+			
+			
         <a href="#Popular">
 		<div class="scroll-down">
             <span>more
@@ -91,7 +94,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#home">Home</a></li>
 						<li><a href="#Popular">Popular</a></li>
-						<li><a href="#categories">categories</a></li>
+						<li><a href="#recent">Recent</a></li>
 						<li><a href="#contact">Our Team</a></li>
 					</ul>
 				</div>
@@ -229,16 +232,16 @@
 	
 	
 	
-    <!-- Categories start -->
+    <!-- Recent start -->
 
-	<section id="categories" class="pfblock pfblock-gray">
+	<section id="recent" class="pfblock pfblock-gray">
 		<div class="container">
 			<div class="row">
 
 				<div class="col-sm-6 col-sm-offset-3">
 
 					<div class="pfblock-header wow fadeInUp">
-						<h2 class="pfblock-title">Categories </h2>
+						<h2 class="pfblock-title">The Room You visit Recently </h2>
 						<div class="pfblock-line"></div>
 						<div class="pfblock-subtitle">
 							
@@ -250,22 +253,27 @@
 			</div>
 
 			<div class="row">
-
+				<span ng-repeat="room in roomList">
 				<div class="col-sm-3">
-
+					
 					<div class="iconbox wow slideInLeft">
 						<div class="iconbox-icon">
 							<span class="icon-magic-wand"></span>
 						</div>
 						<div class="iconbox-text">
-							<h3 class="iconbox-title"></h3>
+							<h3 class="iconbox-title">{{room}}</h3>
 							<div class="iconbox-desc">
 								
+
 							</div>
 						</div>
+						
 					</div>
-
+					
 				</div>
+			</span>
+			
+<!--
 
 				<div class="col-sm-3">
 
@@ -314,12 +322,13 @@
 					</div>
 
 				</div>
-
+ -->
 			</div><!-- .row -->
+			
 		</div><!-- .container -->
 	</section>
 
-	<!-- Categories end -->
+	<!-- Recent end -->
     
 	
     
