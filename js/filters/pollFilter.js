@@ -53,4 +53,20 @@ todomvc.filter('pollFilter', function () {
 		else
 			return qL.splice(0,max);
   };
+}).filter('pollListFilter',function(){
+	return function(input, option){
+		var length = input.length;
+		var returnArray = [];
+		switch(option){
+			case 0:
+			returnArray = input.slice(0,Math.round(length/2));
+			break;
+			case 1:
+			returnArray = input.slice(Math.round(length/2));
+			break;
+			default:
+			returnArray = []
+		};
+		return returnArray;
+	};
 });

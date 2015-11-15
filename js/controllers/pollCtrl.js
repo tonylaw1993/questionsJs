@@ -22,7 +22,9 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
     var url = firebaseURL + roomId + "/polls/";
     var echoRef = new Firebase(url);
     $scope.polls = $firebaseArray(echoRef);
-    
+		
+		$scope.rightBegin = 0;
+		
     // Basic new poll layout
     $scope.choices = [2,3,4,5];
     $scope.numOfChoice = 2;
