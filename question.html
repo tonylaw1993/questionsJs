@@ -39,6 +39,11 @@
 </head>
 <body>
 
+	<div id="preloader">
+		<div id="status"></div>
+	</div>
+		
+		
 		
  <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -208,12 +213,21 @@
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/imagesloaded.pkgd.js"></script>
 
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
 <script>
+	$(window).load(function() {
+		$("#preloader").fadeOut("slow");
+	});
+
 	$(document).ready(function(e) {
+	
+	
+		
+	
 		$('#new-todo').emojiPicker({
 			width: '300px',
 			height: '200px',
