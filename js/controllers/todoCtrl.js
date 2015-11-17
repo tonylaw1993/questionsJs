@@ -108,21 +108,41 @@ $scope.$watchCollection('replies', function () {
     });
 }, true);
 
+// Foul language filter
+$scope.foulLangFilter = function(string){
+    var wordList = [
+        {bad: "fuck", good: "love"},
+        {bad: "shit", good: "oh my shirt"},
+        {bad: "damn", good: "oh my god"},
+        {bad: "dick", good: "dragon"},
+        {bad: "cocky", good: "lovely"},
+        {bad: "pussy", good: "badlady"},
+        {bad: "gayfag", good: "handsome boy"},
+        {bad: "asshole", good:"myfriend"},
+        {bad: "bitch", good: "badgirl"}
+    ];
+    for (var item in wordList){
+        var regex = new RegExp(wordList[item].bad, "ig");
+        string = string.replace(regex, wordList[item].good);
+    }
+    return string;
+};
+
 // Add a Question (todo)
 $scope.addTodo = function () {
    if ($scope.input == undefined || $scope.input.wholeMsg == undefined || $scope.input.head == undefined){
         $scope.postable = false;
         return;
     }
-	var inputMsg = $scope.input.wholeMsg;
-   var title = $scope.input.head.trim();
+	var inputMsg = $scope.input.wholeMsg.trim();
+   var title = $scope.foulLangFilter($scope.input.head.trim());
 	// If there is only emoji or no message is input, just do nothing
 	if (inputMsg === undefined || inputMsg == ""){
 	    $scope.postable = false;
 		return;
 	}
    
-	var newTodo = inputMsg.trim();
+	var newTodo = $scope.foulLangFilter(inputMsg);
 	/*
 	// No input, so just do nothing
 	if (!newTodo.length) {
@@ -235,6 +255,7 @@ $scope.addReply = function (todo){
     }
     
     var tempMsg = $scope.input.replyMsg.trim();
+    tempMsg = $scope.foulLangFilter(tempMsg);
     $scope.editedTodo = todo;
     todo.numReply = todo.numReply + 1;
     $scope.todos.$save(todo);
