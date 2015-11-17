@@ -68,6 +68,12 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
         var i = 0;
         var temp = [];
         for (; i<$scope.numOfChoice; i++){
+            if ($scope.options[i] == "" || $scope.options[i].length < 3){
+                $scope.postable = false;
+                return;
+            }
+        }
+        for (i = 0; i<$scope.numOfChoice; i++){
             temp[i] = {option: $scope.options[i], vote:0};
             $scope.options[i] = "";
         }
