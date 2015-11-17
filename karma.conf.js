@@ -20,9 +20,7 @@ module.exports = function(config) {
       'js/lib/*.js',
       'js/app.js',
       'js/**/*.js',
-
-      'test/unit/*.js',
-		//'node_modules/mockfirebase/browser/*.js'
+      'test/unit/*.js'
     ],
 
 
@@ -30,7 +28,8 @@ module.exports = function(config) {
     exclude: [
 			'js/directives/*.js',
 			'js/dummy.js',
-			'test/unit/dummyTest.js'
+			'test/unit/dummyTest.js',
+			'test/unit/controllerTest.js'
     ],
 
 
