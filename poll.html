@@ -80,15 +80,16 @@
                         </select>
                         </label>
                         <label>Options</label>
-                        <div ng-repeat="x in getOptions(numOfChoice) track by $index"><label>{{$index + 1}}. <input ng-model="options[$index]"></input></label></div>
+                        <div ng-repeat="x in getOptions(numOfChoice) track by $index"><label>{{$index + 1}}. <input ng-model="options[$index]" ng-minlength="3" maxlength="1024" required></input></label></div>
                     </div>
                     <div class = "form-group-btn">
                         <button class="btn btn-submit" type="submit">Raise</button>
-                        <span ng-show="!postable" class="alert alert-danger " role="alert">Title/Options must have more than 3 characters!</span>
+                        <span ng-show="!postable" class="alert alert-danger" role="alert">Title/Options must have more than 3 characters!</span>
                     </div>
             </form>
         </div>
     </div>
+<<<<<<< HEAD
 	
 	<!-- Poll listing -->
     <div class="container"> 
@@ -111,6 +112,22 @@
 				</div>
 			</div>
     <div class="col-xs-6">
+=======
+    <div class="container"> <!-- Poll listing -->
+    <h3>Poll List</h3>
+    <!-- For non-xs device -->
+    <div class="hidden-xs col-sm-6 col-md-6">
+    <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
+        <span class="label label-danger" ng-show="poll.latest">New</span><span class="title">{{poll.head}}</span>
+        <div ng-repeat="item in poll.items | pollListFilter: 0">
+        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
+        </div>
+        <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
+        <hr>
+    </div>
+    </div>
+    <div class="hidden-xs col-sm-6 col-md-6">
+>>>>>>> origin/gh-pages
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
         <span class="label label-danger" ng-show="poll.latest"></span><span class="title invisible">&nbsp;</span>
         <div ng-repeat="item in poll.items | pollListFilter: 1" ng-init="rightBegin = (poll.items.length/2 | number : 0)*1">
@@ -118,7 +135,17 @@
         </div>
         <tt class="invisible">posted: </tt>
         <hr>
-        
+    </div>
+    </div>
+    <!-- For xs-device (smartphone) -->
+    <div class="visible-xs-12 hidden-sm hidden-md hidden-lg">
+    <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
+        <span class="label label-danger" ng-show="poll.latest">New</span><span class="title">{{poll.head}}</span>
+        <div ng-repeat="item in poll.items">
+        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
+        </div>
+        <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
+        <hr>
     </div>
     </div>
     </div>
