@@ -54,9 +54,6 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
         if (poll.timestamp <= new Date().getTime() - 180000) { // 3min
             poll.latest = false;
             }
-        if (poll.totalVote == undefined){
-            poll.totalVote = 0;
-            }
 	    });
     }, true);
     

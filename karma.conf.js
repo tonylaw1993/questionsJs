@@ -29,7 +29,8 @@ module.exports = function(config) {
 			'js/directives/*.js',
 			'js/dummy.js',
 			'test/unit/dummyTest.js',
-			'test/unit/controllerTest.js'
+			'js/lib/custom.js',
+			'js/lib/jquery.emojipicker.a.js'
     ],
 
 
