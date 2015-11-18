@@ -41,17 +41,24 @@ var firebaseURL = "https://scorching-inferno-6291.firebaseio.com/";
 
 $scope.roomId = roomId;
 var url = firebaseURL + roomId + "/questions/";
+var replyUrl = firebaseURL + roomId + "/replies/";
 var echoRef = new Firebase(url);
+var replyRef = new Firebase(replyUrl);
 
 var query = echoRef.orderByChild("order");
+var replyQuery = replyRef.orderByChild("order");
 // Should we limit?
 //.limitToFirst(1000);
 $scope.todos = $firebaseArray(query);
+$scope.replies = $firebaseArray(replyQuery);
 
-//$scope.input.wholeMsg = '';
+$scope.input = {};
+
 $scope.editedTodo = null;
+$scope.editedReply = null;
 // checker for posting
 $scope.postable = true;
+$scope.replyable = true;
 
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
@@ -73,10 +80,10 @@ $scope.$watchCollection('todos', function () {
                         liked: false,
                         disliked: false
                         }
-                }                
-                
+                } 
 		// set time
-		todo.dateString = new Date(todo.timestamp).toString();
+		
+		//todo.dateString = new Date(todo.timestamp).toString();
 		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 		//todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc); //To be removed
@@ -91,20 +98,51 @@ $scope.$watchCollection('todos', function () {
 	$scope.allChecked = remaining === 0;
 }, true);
 
+// pre-precessing for collection of replies
+$scope.$watchCollection('replies', function () {
+	$scope.replies.forEach(function (reply) {
+		// Skip invalid entries so they don't break the entire app.
+		 if (!reply || reply.replyMsg == "") {
+			return;
+		}
+    });
+}, true);
+
+// Foul language filter
+$scope.foulLangFilter = function(string){
+    var wordList = [
+        {bad: "fuck", good: "love"},
+        {bad: "shit", good: "oh my shirt"},
+        {bad: "damn", good: "oh my god"},
+        {bad: "dick", good: "dragon"},
+        {bad: "cocky", good: "lovely"},
+        {bad: "pussy", good: "badlady"},
+        {bad: "gayfag", good: "handsome boy"},
+        {bad: "asshole", good:"myfriend"},
+        {bad: "bitch", good: "badgirl"}
+    ];
+    for (var item in wordList){
+        var regex = new RegExp(wordList[item].bad, "ig");
+        string = string.replace(regex, wordList[item].good);
+    }
+    return string;
+};
+
+// Add a Question (todo)
 $scope.addTodo = function () {
    if ($scope.input == undefined || $scope.input.wholeMsg == undefined || $scope.input.head == undefined){
         $scope.postable = false;
         return;
     }
-	var inputMsg = $scope.input.wholeMsg;
-   var title = $scope.input.head.trim();
+	var inputMsg = $scope.input.wholeMsg.trim();
+   var title = $scope.foulLangFilter($scope.input.head.trim());
 	// If there is only emoji or no message is input, just do nothing
 	if (inputMsg === undefined || inputMsg == ""){
 	    $scope.postable = false;
 		return;
 	}
    
-	var newTodo = inputMsg.trim();
+	var newTodo = $scope.foulLangFilter(inputMsg);
 	/*
 	// No input, so just do nothing
 	if (!newTodo.length) {
@@ -125,7 +163,8 @@ $scope.addTodo = function () {
 		echo: 0,
 		dislike: 0,
 		order: 0,
-		latest: true
+		latest: true,
+		numReply: 0
         }).then(function(ref){
                 var id = ref.key();
                 $scope.$storage[id] = {
@@ -208,6 +247,101 @@ $scope.minDislike = function (todo) {		// -1 dislike
 	$scope.$storage[todo.$id].disliked = false;
 };
 
+// Add reply
+$scope.addReply = function (todo){
+    if ($scope.input == undefined || $scope.input.replyMsg == undefined || $scope.input.replyMsg == ""){
+        $scope.replyable = false;
+        return;
+    }
+    
+    var tempMsg = $scope.input.replyMsg.trim();
+    tempMsg = $scope.foulLangFilter(tempMsg);
+    $scope.editedTodo = todo;
+    todo.numReply = todo.numReply + 1;
+    $scope.todos.$save(todo);
+    
+    $scope.replies.$add({
+        replyMsg: tempMsg,
+        like: 0,
+        dislike: 0,
+        timestamp: new Date().getTime(),
+        parentId: todo.$id
+    }).then(function(ref){
+        var id = ref.key();
+        $scope.$storage[id] = {
+               liked: false,
+               disliked: false
+                 };
+    });
+    $scope.replyable = true;
+    $scope.input.replyMsg = "";
+}; 
+
+$scope.addReplyLike = function (reply) {
+        $scope.editedReply = reply;
+        // Initial Stage
+        if ($scope.$storage[reply.$id].liked == false){
+                if ($scope.$storage[reply.$id].disliked == false){
+                        // This user like this question
+                        reply.like = reply.like + 1;
+                        // Change the Like button
+	                  $scope.$storage[reply.$id].liked = true;
+                } else {
+                        // From Dislike to Like
+                        reply.dislike = reply.dislike - 1;
+                        reply.like = reply.like + 1;
+                        $scope.$storage[reply.$id].liked = true;
+                        $scope.$storage[reply.$id].disliked = false;
+                        }
+        } else {
+                // Do nothing
+                return;
+                }
+      // Save the result
+	$scope.replies.$save(reply);
+};
+
+$scope.addReplyDislike = function (reply) {		// +1 dislike
+        $scope.editedReply = reply;
+        //Initial Stage
+        if ($scope.$storage[reply.$id].disliked == false){
+                if ($scope.$storage[reply.$id].liked == false){
+                        //This user dislike this question
+                        reply.dislike = reply.dislike + 1;
+                        // change the dislike button
+	                  $scope.$storage[reply.$id].disliked = true;
+                } else {
+                        //From Like to dislike
+                        reply.like = reply.like - 1;
+                        reply.dislike = reply.dislike + 1;
+                        $scope.$storage[reply.$id].liked = false;
+                        $scope.$storage[reply.$id].disliked = true;
+                        }
+        } else {
+                // Do nothing
+                return;
+                }
+      // Save the result
+	$scope.replies.$save(reply);
+};
+
+$scope.minReplyLike = function (reply) {
+	$scope.editedReply = reply;
+	reply.like = reply.like - 1;
+	$scope.replies.$save(reply);
+	// Change the like button
+	$scope.$storage[reply.$id].liked = false;
+};
+
+$scope.minReplyDislike = function (reply) {		// -1 dislike
+	$scope.editedReply = reply;
+	reply.dislike = reply.dislike - 1;
+	$scope.replies.$save(reply);
+	// Change the dislike button
+	$scope.$storage[reply.$id].disliked = false;
+};
+
+// Other function
 $scope.doneEditing = function (todo) {
 	$scope.editedTodo = null;
 	var wholeMsg = todo.wholeMsg.trim();
