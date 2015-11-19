@@ -1,5 +1,5 @@
 body {
-	margin-top: 60px;
+	/*margin-top: 60px;*/
 }
 
 
@@ -8,6 +8,51 @@ body {
 	text-decoration: line-through;
 }
 
+.raisequestion{
+	padding-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+.mdl-textfield{
+	width: 100%;
+}
+
+.questionsection{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+.questionsection .reply{
+	padding-left: 50px;
+	width: 100%;
+}
+
+.raisepoll{
+	padding-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+.pollList{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+/* Poll */
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
 
 /* ---------------------------------------------- /*
  * Preloader
@@ -111,7 +156,7 @@ body {
 	 font-size:16px;
 	 display: -moz-box;
 }
-
+/*
 .form-group .form-group-btn{
 	 margin-top: 5px;
 	 margin-bottom: 5px;
@@ -126,7 +171,7 @@ body {
     border-radius: 4px;
 }
 .form-group button:hover {
-	/* float: right;*/
+	//float: right;
     color: #333;
     background-color: #EBEBEB;
     border-color: #ADADAD;
@@ -137,7 +182,7 @@ body {
     border-color: #46b8da;
 	
 }
-
+*/
 
 
 /* ---------------------------------------------- /*
