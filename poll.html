@@ -191,7 +191,7 @@ $('a[href*=top]').bind("click", function(e){
 				e.preventDefault();
 			});
 
-			$(window).scroll(function() {
+			$('main').scroll(function() {
 				if ($(this).scrollTop() > 100) {
 					$('.scroll-up').fadeIn();
 				} else {
