@@ -119,8 +119,10 @@
 				<div class = "form-group-btn">
 				<button class="btn btn-submit" type="submit">Ask</button>
 				<button class="btn btn-emoji" id="emoji" ng-disabled="!mobile">Add Emoji</button>
+				<input type="file" ng-model="input.photo" ng-disabled="!mobile" id="photoUploader" accept="image/*">
             <span ng-show="!postable" class="alert alert-danger " role="alert">Title/Content must have more than 3 characters! Please don't spam emojis!</span>
 				</div>
+				<img id="photoUploaded" ng-show="isPhotoUploaded" src="">
 				
 
 			</form>
@@ -144,7 +146,7 @@
 						<span class="title" ng-class="{completed: todo.completed}">{{todo.head}}</span>
 						<span class="label label-danger" ng-show="todo.latest">New</span>
 						<p id ="message" class="list-group-item-text"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
-						
+						<img ng-show="todo.photo" src={{todo.photo}}>
 
 			
 					</div>
