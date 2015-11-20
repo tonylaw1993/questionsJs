@@ -58,7 +58,13 @@ div {
 	
 }
 
-
+.questionsection p {
+    font-size: 16px;
+    letter-spacing: 0;
+    width: 90%;
+    margin: 0 0 0px;
+    padding-left: 25px;
+}
 
 .questionsection .mdl-card__title {
 	
@@ -94,11 +100,11 @@ div {
 }
 
  .questionsection  .mdl-textfield__input {
-    border: none;
+   border: 1px solid rgba(0,0,0,.12);
     border-bottom: 1px solid rgba(0,0,0,.12);
     display: block;
     font-size: 16px;
-    margin: 10px 0px;
+    margin: 10px -30px;
     padding: 4px 4px;
     width: 100%;
     background: 0 0;
@@ -107,11 +113,11 @@ div {
     color: inherit;
 }
 .questionsection .mdl-card__actions {
-    font-size: 16px;
+    font-size: 14px;
     line-height: normal;
     width: 100%;
     background-color: transparent;
-    padding: 24px;
+    padding-left: 24px;
     box-sizing: border-box;
 }
 
@@ -123,7 +129,9 @@ div {
     font-weight: 400;
 }
 
-
+.questionsection .mdl-card{
+	min-height: 0px;
+}
 
 .raisepoll{
 	padding-top: 20px;

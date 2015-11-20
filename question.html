@@ -87,11 +87,11 @@
                id="title"/>	
 				</div>
 				<br />
-				
-				<div class="content mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div class="content">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<textarea class="mdl-textfield__input" type="text"  id="content" ng-model="input.wholeMsg" required maxlength="1024" ng-minlength="3" title="Please enter at least 3 characters!" ></textarea>
 				<label class="mdl-textfield__label" for="content">Content</label>
-  
+				</div>
 				</div>
 				
 				<div class="">
@@ -149,7 +149,7 @@
 						
 					
 					<div class="mdl-layout-spacer"></div>
-					<div id="replyarea" ng-show="showReply" style="margin-left: 50px;"><form ng-submit="addReply(todo)"><textarea type="text" class="mdl-textfield__input" id="new-reply" ng-model="input.replyMsg" ng-minlength="3" maxlength="1024" placeholder="Enter your Reply!" style="display: -moz-box"></textarea><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Reply</button><span ng-show="!replyable" class="alert alert-danger " role="alert">Reply must have more than 3 characters!</span></form>
+					<div id="replyarea" ng-show="showReply" style="margin-left: 50px;"><form ng-submit="addReply(todo)"><textarea type="text" class="mdl-textfield__input" id="new-reply" ng-model="input.replyMsg" ng-minlength="3" maxlength="1024" placeholder="Enter your Reply!" style="display: -moz-box"></textarea><button id="" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Reply</button><span ng-show="!replyable" class="alert alert-danger " role="alert">Reply must have more than 3 characters!</span></form>
            <div class="comment_list">
 					<h5>Comment:</h5>
 		   
