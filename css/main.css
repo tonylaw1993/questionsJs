@@ -269,6 +269,7 @@ body {
 
 #photoUploader{
 	display: inline;
+	max-width: 100%;
 }
 
 

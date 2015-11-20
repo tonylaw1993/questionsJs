@@ -166,7 +166,7 @@ $scope.addTodo = function () {
 		order: 0,
 		latest: true,
 		numReply: 0,
-		photo: thumbnail
+		photo: $scope.input.photo
         }).then(function(ref){
                 var id = ref.key();
                 $scope.$storage[id] = {
@@ -178,7 +178,8 @@ $scope.addTodo = function () {
    $scope.postable = true;
 	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
-	document.getElementById("photoUploaded").src = "";
+	$scope.input.photo = null;
+	$("#photoUploader").val('');
 };
 
 $scope.editTodo = function (todo) {
