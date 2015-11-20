@@ -58,15 +58,15 @@
 					<a class="mdl-navigation__link" ng-href="poll.html#/{{roomId}}">Polling</a>
 					<a class="mdl-navigation__link" href="" ng-hide="$authData"  ng-click="FBLogin()">Login</a>
 					<a class="mdl-navigation__link" href="" ng-show="$authData"  ng-click="FBLogout()">Logout</a>
-					<a class="mdl-navigation__link"><img ng-show="$authData" ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
+					<a class="mdl-navigation__link" ng-show="$authData"><img ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
 				</nav>
 				</div>
 			</header>
 			<div class="mdl-layout__drawer">
 				<span class="mdl-layout__title">Questions Room: {{roomId}}</span>
 				<nav class="mdl-navigation">
+				   <a class="mdl-navigation__link" ng-show="$authData"><img ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
 					<a class="mdl-navigation__link" href="index.html">Home</a>
-					<a class="mdl-navigation__link"><img ng-show="$authData" ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
 					<a class="mdl-navigation__link" href="#">Question</a>
 					<a class="mdl-navigation__link" ng-href="poll.html#/{{roomId}}">Polling</a>
 					<a class="mdl-navigation__link" href="" ng-hide="$authData"  ng-click="FBLogin()">Login</a>
@@ -93,13 +93,14 @@
 				<label class="mdl-textfield__label" for="content">Content</label>
 				</div>
 
-				<div class="">
+				
 				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Ask</button>
 				<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="emoji" ng-disabled="!mobile"><i class="material-icons">mood</i></button>
-				<input type="file" ng-disabled="!mobile" id="photoUploader" accept="image/*">
+				<input type="file" ng-disabled="!mobile" id="photoUploader" accept="image/*" multiple="multiple">
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" type="button" id="buttonPhoto"><i class="material-icons">insert_photo</i></button>
             <span ng-show="!postable" class="" role="alert">Title/Content must have more than 3 characters! Please don't spam emojis!</span>
-				</div>
-				<img id="photoUploaded" ng-show="input.photo" ng-src="{{ input.photo || '//:0' }}">
+				
+				<!--<img id="photoUploaded" ng-show="input.photo" ng-src="{{ input.photo || '//:0' }}">-->
 				
 
 			</form>
@@ -118,15 +119,16 @@
 					<div class="mdl-card__title">
 						<span class="mdl-badge" data-badge="{{todo.echo+todo.dislike}}"></span>
 						<h3 class="mdl-card__title-text" ng-class="{completed: todo.completed}" style="word-wrap: break-word;">{{todo.head}}</h3>
-						<span class="" ng-show="todo.latest">New</span>
+						<span class="new_tag" ng-show="todo.latest">New</span>
 					</div>
 					
 					<div class="mdl-color-text--grey-700 mdl-card__supporting-text">
 						<p id ="message" class="message"><span ng-bind-html="todo.wholeMsg | linky" style="white-space: pre-line"></span></p>
+						<span ng-repeat="photo in todo.photos">
+						<a href="" ng-click="zoom = !zoom" ng-init="zoom = false"><img class="photo_thumbnail" id="photos" ng-src="{{photo}}" ng-class="{photo_enlarge: zoom}"/></a>
+						</span>
 					</div>
-					<div><img id="photos" ng-show="todo.photo" src="{{todo.photo}}"></div>
-					
-					
+
 					
 					<div class="mdl-card__actions" id="list-footer">
 						<div class="">
@@ -153,7 +155,7 @@
            <div class="comment_list">
 					<h5>Comment:</h5>
 		   
-				<div class="mdl-card  reply" ng-repeat="reply in replies | filter: {parentId: todo.$id} | orderBy: '-reply.timestamp'">
+				<div class="mdl-card  reply" ng-repeat="reply in replies | filter: {parentId: todo.$id} | orderBy: ['-reply.like','-reply.timestamp']">
 				
 					<div class="mdl-card__supporting-text">
 					<p><span ng-bind-html="reply.replyMsg | linky" style="white-space: pre-line"></span></p>
@@ -268,7 +270,13 @@
 				}
 			});
 
-	});					
+	});
+// http://html5-demos.appspot.com/static/styled_file_input.html	
+document.querySelector('#buttonPhoto').addEventListener('click', function(e) {
+  var fileInput = document.querySelector('#photoUploader');
+  //click(fileInput); // Simulate the click with a custom event.
+  fileInput.click(); // Or, use the native click() of the file input.
+}, false);				
 </script>
 </body>
 </html>
