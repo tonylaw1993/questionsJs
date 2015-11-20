@@ -27,7 +27,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
 		
     // Basic new poll layout
     $scope.choices = [2,3,4,5];
-    $scope.numOfChoice = 2;
+    $scope.numOfChoice = 5;
     $scope.options = ["", "", "", "", ""]
     $scope.getOptions = function(n){
         return new Array(n);

@@ -71,7 +71,7 @@
             <form id="poll-form" ng-submit="addPoll()">
                 <h3>Raise a Poll</h3>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <label class="mdl-textfield__label">Enter Your Poll Title</label>
+                        <label class="mdl-textfield__label">Title</label>
                             <input type="text" class="mdl-textfield__input" ng-model="head" ng-minlength="3" maxlength="1024" required="input.head"></input>	
                     </div>
                     <div>
@@ -80,7 +80,11 @@
                         </select>
                         </label>
                         <label class="mdl-textfield__label">Options</label>
-                        <div ng-repeat="x in getOptions(numOfChoice) track by $index" class="mdl-textfield mdl-js-textfield"><label class="mdl-textfield__label">{{$index + 1}}.</label><input type="text" class="mdl-textfield__input" ng-model="options[$index]" ng-minlength="3" maxlength="1024" required></input></div>
+                        <div ng-repeat="x in getOptions(numOfChoice) track by $index" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " >
+						<label class="mdl-textfield__label">Option {{$index + 1}}.</label>
+						<input type="text" class="mdl-textfield__input" ng-model="options[$index]" ng-minlength="3" maxlength="50" required>
+						</input>
+						</div>
                     </div>
                     <div class="">
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Raise</button>
@@ -105,6 +109,8 @@
 				</g>
 				</svg>
         </div>
+		
+
         <tt>posted: <span am-time-ago="poll.timestamp"></span></tt>
         <hr>
     </div>

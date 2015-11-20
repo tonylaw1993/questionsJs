@@ -131,6 +131,7 @@ div {
 
 .questionsection .mdl-card{
 	min-height: 0px;
+	margin-bottom: 10px;
 }
 
 .raisepoll{
