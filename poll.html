@@ -25,6 +25,10 @@
 	<link href='https://fonts.googleapis.com/css?family=Crete+Round:400,400italic|Inconsolata' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="fonts/font-awesome-4.4.0/css/font-awesome.min.css">
 	
+	<!-- Custom styles CSS -->
+	<link href="css/style.css" rel="stylesheet" media="screen">
+	
+	
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
 	<link rel="stylesheet" href="css/main.css">
 	
@@ -36,6 +40,9 @@
 </head>
 <body>
 
+	<div id="preloader">
+		<div id="status"></div>
+	</div>
 		
  <!-- Fixed navbar -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -69,13 +76,13 @@
 			<!-- Raise a poll -->
 			<div class="raisepoll">
             <form id="poll-form" ng-submit="addPoll()">
-                <h3>Raise a Poll</h3>
+                <h2>Raise a Poll</h2>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <label class="mdl-textfield__label">Title</label>
                             <input type="text" class="mdl-textfield__input" ng-model="head" ng-minlength="3" maxlength="1024" required="input.head"></input>	
                     </div>
                     <div>
-                        <label>Number of Choices
+                        <label>Select No. of Choices
                         <select id="numberOfChoice" ng-model="numOfChoice" ng-options="choice as choice for choice in choices">
                         </select>
                         </label>
@@ -92,30 +99,53 @@
                     </div>
             </form>
         </div>
-				<div class="pollList">
-				<h3>Poll List</h3>		
-				</div>
-		<div class="mdl-grid pollList"> <!-- Poll listing -->
-    
+		<div class="pollList">
+		<div class="mdl-grid pollList">
+				
+				
+				
+				
+				
+				
+				<h2>Poll List</h2>		
+				
+		 <!-- Poll listing -->
+    <div class="mdl-card mdl-shadow--4dp" style="width: 100%;">
     <!-- For non-xs device -->
-    <div class="mdl-cell mdl-cell--hide-phone mdl-cell--6-col">
-		
+	
+    
+		<div class="mdl-cell mdl-cell--12-col">
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
-        <div class="title"><span class="label label-danger" ng-show="poll.latest">New</span>{{poll.head}}</div><br />
-        <div ng-repeat="item in poll.items | pollListFilter: 0">
-        <button class="mdl-button mdl-js-button mdl-button--raised" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /><br />
-				<svg class="chart" width="420" height="120"><g><rect width="{{item.vote/poll.totalVote*420}}" height="19"></rect>
-				<text x="37" y="9.5" dy=".35em">{{item.vote}}</text>
+       
+	   <div class="mdl-card__title">
+						
+						<h3 class="mdl-card__title-text"  style="word-wrap: break-word;">{{poll.head}}</h3>
+						
+						<i class="material-icons" ng-show="poll.latest">fiber_new</i>
+			
+					</div>
+	   
+        <div ng-repeat="item in poll.items">
+        
+				<svg class="chart" width="420" height="120"><g><rect width="{{((item.vote*10)+2)/100*420}}" height="19"></rect>
+				<text x="10" y="9.5" dy=".35em">{{item.option}}</text>
 				</g>
 				</svg>
         </div>
-		
-
-        <tt>posted: <span am-time-ago="poll.timestamp"></span></tt>
+        <div ng-repeat="item in poll.items">
+        
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+					<input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted" >
+					<span class="mdl-badge" data-badge="{{item.vote}}"> <span class="mdl-checkbox__label">{{item.option}}</span></span>
+				</label>
+        </div>
+        <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
         <hr>
     </div>
     </div>
-	
+    
+	<!--
     <div class="mdl-cell mdl-cell--hide-phone mdl-cell--6-col">
 		
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
@@ -131,8 +161,11 @@
         <hr>
     </div>
     </div>
+	-->
 	
     <!-- For xs-device (smartphone) -->
+	
+	<!--
     <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet">
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
         <span class="label label-danger" ng-show="poll.latest">New</span><span class="title">{{poll.head}}</span>
@@ -146,8 +179,10 @@
         <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
         <hr>
     </div>
+    </div>  -->
     </div>
-    </div>
+	</div>
+	</div>
 		<!-- Scroll to top -->
 
 	<div class="scroll-up">
@@ -190,7 +225,13 @@
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
 
 <script>
-$('a[href*=top]').bind("click", function(e){
+
+$(window).load(function() {
+		$("#preloader").fadeOut("slow");
+	});
+
+$(document).ready(function(e) {
+		$('a[href*=top]').bind("click", function(e){
 			$('html, body').stop().animate({
 				scrollTop: 0
 				}, 1000);
@@ -204,6 +245,8 @@ $('a[href*=top]').bind("click", function(e){
 					$('.scroll-up').fadeOut();
 				}
 			});
+			
+		});	
 </script>
 
 </body>
