@@ -16,8 +16,9 @@
 	<title>Question Room: {{roomId}}</title>
 
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- MDL -->
+	<link rel="stylesheet" href="css/material.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	
 	<!-- Font CSS -->
 	<link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
@@ -37,108 +38,119 @@
 
 		
  <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Questions Room: <tt>{{roomId}}</tt></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a ng-href="question.html#/{{roomId}}">Question</a></li>
-            <li class=active><a href="">Polling<span class="badge" style="background-color: red;">{{polls.length}}</span></a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="" ng-hide="$authData"   ng-click="FBLogin()" >Login</a></li>
-            <li><a href="" ng-show="$authData"   ng-click="FBLogout()">Logout</a></li>
-			<li><img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
-			{{$authData.facebook.displayName}}</li>
-
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-	
-	<!-- Raise a poll -->
-	 <div class="container">
-        <div class="form-group">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			<header class="mdl-layout__header">
+				<div class="mdl-layout-icon"></div>
+				<div class="mdl-layout__header-row">
+				<span class="mdl-layout__title">Questions Room: {{roomId}}</span>
+				<div class="mdl-layout-spacer"></div>
+				<nav class="mdl-navigation mdl-layout--large-screen-only">
+					<a class="mdl-navigation__link" href="index.html">Home</a>
+					<a class="mdl-navigation__link" ng-href="question.html#/{{roomId}}">Question</a>
+					<a class="mdl-navigation__link" href="#">Polling</a>
+					<a class="mdl-navigation__link" href="" ng-hide="$authData"  ng-click="FBLogin()">Login</a>
+					<a class="mdl-navigation__link" href="" ng-show="$authData"  ng-click="FBLogout()">Logout</a>
+					<a class="mdl-navigation__link"><img ng-show="$authData" ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
+				</nav>
+				</div>
+			</header>
+			<div class="mdl-layout__drawer">
+				<span class="mdl-layout__title">Questions Room: {{roomId}}</span>
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link"><img ng-show="$authData" ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
+					<a class="mdl-navigation__link" href="index.html">Home</a>
+					<a class="mdl-navigation__link" ng-href="question.html#/{{roomId}}">Question</a>
+					<a class="mdl-navigation__link" href="#">Polling</a>
+					<a class="mdl-navigation__link" href="" ng-hide="$authData"  ng-click="FBLogin()">Login</a>
+					<a class="mdl-navigation__link" href="" ng-show="$authData"  ng-click="FBLogout()">Logout</a>
+				</nav>
+			</div>
+			<main class="mdl-layout__content">
+			<!-- Raise a poll -->
+			<div class="raisepoll">
             <form id="poll-form" ng-submit="addPoll()">
-                <h2>Raise a Poll</h2>
-                    <div class="form-group-title">
-                        <label>Title </label>
-                            <input type="text" class="form-control" ng-model="head" ng-minlength="3" maxlength="1024" placeholder="Enter Your Poll Title" required="input.head"></input>	
+                <h3>Raise a Poll</h3>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <label class="mdl-textfield__label">Enter Your Poll Title</label>
+                            <input type="text" class="mdl-textfield__input" ng-model="head" ng-minlength="3" maxlength="1024" required="input.head"></input>	
                     </div>
-                    <div class="form-group-content">
+                    <div>
                         <label>Number of Choices
                         <select id="numberOfChoice" ng-model="numOfChoice" ng-options="choice as choice for choice in choices">
                         </select>
                         </label>
-                        <label>Options</label>
-                        <div ng-repeat="x in getOptions(numOfChoice) track by $index"><label>{{$index + 1}}. <input ng-model="options[$index]" ng-minlength="3" maxlength="1024" required></input></label></div>
+                        <label class="mdl-textfield__label">Options</label>
+                        <div ng-repeat="x in getOptions(numOfChoice) track by $index" class="mdl-textfield mdl-js-textfield"><label class="mdl-textfield__label">{{$index + 1}}.</label><input type="text" class="mdl-textfield__input" ng-model="options[$index]" ng-minlength="3" maxlength="1024" required></input></div>
                     </div>
-                    <div class = "form-group-btn">
-                        <button class="btn btn-submit" type="submit">Raise</button>
+                    <div class="">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Raise</button>
                         <span ng-show="!postable" class="alert alert-danger" role="alert">Title/Options must have more than 3 characters!</span>
                     </div>
             </form>
         </div>
-    </div>
-
-    <div class="container"> <!-- Poll listing -->
-    <h3>Poll List</h3>
+				<div class="pollList">
+				<h3>Poll List</h3>		
+				</div>
+		<div class="mdl-grid pollList"> <!-- Poll listing -->
+    
     <!-- For non-xs device -->
-    <div class="hidden-xs col-sm-6 col-md-6">
+    <div class="mdl-cell mdl-cell--hide-phone mdl-cell--6-col">
+		
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
-        <span class="label label-danger" ng-show="poll.latest">New</span><span class="title">{{poll.head}}</span>
+        <div class="title"><span class="label label-danger" ng-show="poll.latest">New</span>{{poll.head}}</div><br />
         <div ng-repeat="item in poll.items | pollListFilter: 0">
-        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
+        <button class="mdl-button mdl-js-button mdl-button--raised" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /><br />
+				<svg class="chart" width="420" height="120"><g><rect width="{{item.vote/poll.totalVote*420}}" height="19"></rect>
+				<text x="37" y="9.5" dy=".35em">{{item.vote}}</text>
+				</g>
+				</svg>
         </div>
-        <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
+        <tt>posted: <span am-time-ago="poll.timestamp"></span></tt>
         <hr>
     </div>
     </div>
 	
-    <div class="hidden-xs col-sm-6 col-md-6">
-
+    <div class="mdl-cell mdl-cell--hide-phone mdl-cell--6-col">
+		
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
-        <span class="label label-danger" ng-show="poll.latest"></span><span class="title invisible">&nbsp;</span>
+        <div class="title invisible"><span class="label label-danger invisible" ng-show="poll.latest">New</span>{{poll.head}}</div><br />
         <div ng-repeat="item in poll.items | pollListFilter: 1" ng-init="rightBegin = (poll.items.length/2 | number : 0)*1">
-        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{rightBegin + $index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
+        <button class="mdl-button mdl-js-button mdl-button--raised" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{rightBegin + $index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /><br />
+				<svg class="chart" width="420" height="120"><g><rect width="{{item.vote/poll.totalVote*420}}" height="19"></rect>
+				<text x="37" y="9.5" dy=".35em">{{item.vote}}</text>
+				</g>
+				</svg>
         </div>
-        <tt class="invisible">posted: </tt>
+        <tt class="invisible">posted: <span am-time-ago="poll.timestamp"></span></tt>
         <hr>
     </div>
     </div>
 	
     <!-- For xs-device (smartphone) -->
-    <div class="visible-xs-12 hidden-sm hidden-md hidden-lg">
+    <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet">
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
         <span class="label label-danger" ng-show="poll.latest">New</span><span class="title">{{poll.head}}</span>
         <div ng-repeat="item in poll.items">
-        <button class="btn btn-default" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br /> Votes:<div class="progress"><span class="progress-bar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width: {{item.vote/poll.totalVote*100}}%; min-width: 1em;"><span>{{item.vote}}</span></span></div>
+        <button class="mdl-button mdl-js-button mdl-button--raised" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">Vote for {{$index + 1}}:</button>&nbsp;<span>{{item.option}}</span> <br />
+				<svg class="chart" width="420" height="120"><g><rect width="{{item.vote/poll.totalVote*420}}" height="19"></rect>
+				<text x="37" y="9.5" dy=".35em">{{item.vote}}</text>
+				</g>
+				</svg>
         </div>
         <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
         <hr>
     </div>
     </div>
     </div>
-	
-	
-	
-	<!-- Scroll to top -->
+		<!-- Scroll to top -->
 
 	<div class="scroll-up">
 		<a href="#top"><i class="fa fa-angle-up"></i></a>
 	</div>
     
-    <!-- Scroll to top end-->
-
+  <!-- Scroll to top end-->
+			</main>
+	
 
 
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
@@ -166,7 +178,7 @@
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
-<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/material.min.js"></script>
 
 <!-- Javascript files .Font -->
 <script src="http://use.edgefonts.net/source-sans-pro.js"></script> 
@@ -179,7 +191,7 @@ $('a[href*=top]').bind("click", function(e){
 				e.preventDefault();
 			});
 
-			$(window).scroll(function() {
+			$('main').scroll(function() {
 				if ($(this).scrollTop() > 100) {
 					$('.scroll-up').fadeIn();
 				} else {

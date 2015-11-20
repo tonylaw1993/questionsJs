@@ -60,8 +60,6 @@ $scope.editedReply = null;
 $scope.postable = true;
 $scope.replyable = true;
 
-var thumbnail;
-$scope.isPhotoUploaded = false;
 
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
@@ -108,12 +106,6 @@ $scope.$watchCollection('replies', function () {
 		 if (!reply || reply.replyMsg == "") {
 			return;
 		}
-		if ($scope.$storage[reply.$id] == undefined){
-                $scope.$storage[reply.$id] = {
-                        liked: false,
-                        disliked: false
-                        }
-                }
     });
 }, true);
 
@@ -425,9 +417,7 @@ function readImage() {
     if ( this.files && this.files[0] ) {
         var FR= new FileReader();
         FR.onload = function(e) {
-			document.getElementById("photoUploaded").src = e.target.result;
-			thumbnail = e.target.result;
-			$scope.isPhotoUploaded = true;
+			$scope.input.photo = e.target.result;
 			$scope.$apply();
         };
         FR.readAsDataURL( this.files[0] );
