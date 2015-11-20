@@ -279,6 +279,12 @@ div {
 }
 */
 
+#photoUploader{
+	display: inline;
+	max-width: 100%;
+}
+
+
 
 /* ---------------------------------------------- /*
  *	List-group

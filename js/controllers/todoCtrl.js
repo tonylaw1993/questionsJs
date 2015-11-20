@@ -60,6 +60,7 @@ $scope.editedReply = null;
 $scope.postable = true;
 $scope.replyable = true;
 
+
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
 	var total = 0;
@@ -150,6 +151,9 @@ $scope.addTodo = function () {
 	}
 	*/
 	
+	if ($scope.input.photo === undefined) {
+		$scope.input.photo = null;
+	}
 	
 	$scope.todos.$add({
 		wholeMsg: newTodo,
@@ -164,7 +168,8 @@ $scope.addTodo = function () {
 		dislike: 0,
 		order: 0,
 		latest: true,
-		numReply: 0
+		numReply: 0,
+		photo: $scope.input.photo
         }).then(function(ref){
                 var id = ref.key();
                 $scope.$storage[id] = {
@@ -176,6 +181,8 @@ $scope.addTodo = function () {
    $scope.postable = true;
 	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
+	$scope.input.photo = null;
+	$("#photoUploader").val('');
 };
 
 $scope.editTodo = function (todo) {
@@ -408,5 +415,20 @@ angular.element($window).bind("scroll", function() {
 		$scope.$apply();
 	}
 });
+
+//photo upload
+function readImage() {
+    if ( this.files && this.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {
+			$scope.input.photo = e.target.result;
+			$scope.$apply();
+        };
+        FR.readAsDataURL( this.files[0] );
+    }
+}
+
+document.getElementById("photoUploader").addEventListener("change", readImage, false);
+//////////////
 
 }]);
