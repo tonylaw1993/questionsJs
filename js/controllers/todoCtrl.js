@@ -53,12 +53,14 @@ $scope.todos = $firebaseArray(query);
 $scope.replies = $firebaseArray(replyQuery);
 
 $scope.input = {};
+$scope.input.photos = [];
 
 $scope.editedTodo = null;
 $scope.editedReply = null;
 // checker for posting
 $scope.postable = true;
 $scope.replyable = true;
+
 
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
@@ -105,6 +107,12 @@ $scope.$watchCollection('replies', function () {
 		 if (!reply || reply.replyMsg == "") {
 			return;
 		}
+		if ($scope.$storage[reply.$id] == undefined){
+                $scope.$storage[reply.$id] = {
+                        liked: false,
+                        disliked: false
+                        }
+                } 
     });
 }, true);
 
@@ -149,8 +157,7 @@ $scope.addTodo = function () {
 		return;
 	}
 	*/
-	
-	
+		
 	$scope.todos.$add({
 		wholeMsg: newTodo,
 		head: title,
@@ -164,7 +171,8 @@ $scope.addTodo = function () {
 		dislike: 0,
 		order: 0,
 		latest: true,
-		numReply: 0
+		numReply: 0,
+		photos: $scope.input.photos
         }).then(function(ref){
                 var id = ref.key();
                 $scope.$storage[id] = {
@@ -176,6 +184,8 @@ $scope.addTodo = function () {
    $scope.postable = true;
 	$scope.input.head = '';
 	$scope.input.wholeMsg = '';
+	$scope.input.photos = [];
+	$("#photoUploader").val('');
 };
 
 $scope.editTodo = function (todo) {
@@ -369,7 +379,7 @@ $scope.FBLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
-				$scope.isAdmin = true;
+				//$scope.isAdmin = true;
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -408,5 +418,44 @@ angular.element($window).bind("scroll", function() {
 		$scope.$apply();
 	}
 });
+
+// photo upload
+// http://stackoverflow.com/questions/23402187/multiple-files-upload-and-using-file-reader-to-preview
+function readImage(event) {
+/*
+    if ( this.files && this.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {
+			$scope.input.photo = e.target.result;
+			$scope.$apply();
+        };
+        FR.readAsDataURL( this.files[0] );
+    }
+    */
+    if (window.File && window.FileList && window.FileReader) {
+        event = event || window.event;
+        var files = event.target.files; //FileList object
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            //Only pics
+            if (!file.type.match('image')) continue;
+
+            var picReader = new FileReader();
+            picReader.onload = function(e) {
+                $scope.input.photos.push(e.target.result);
+                $scope.$apply();
+            };
+
+            //Read the image
+            picReader.readAsDataURL(file);
+        }
+    } else {
+        console.log("Your browser does not support File API");
+    }
+}
+
+document.getElementById("photoUploader").addEventListener("change", readImage, false);
+//////////////
 
 }]);

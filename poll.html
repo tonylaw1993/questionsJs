@@ -50,14 +50,14 @@
 					<a class="mdl-navigation__link" href="#">Polling</a>
 					<a class="mdl-navigation__link" href="" ng-hide="$authData"  ng-click="FBLogin()">Login</a>
 					<a class="mdl-navigation__link" href="" ng-show="$authData"  ng-click="FBLogout()">Logout</a>
-					<a class="mdl-navigation__link"><img ng-show="$authData" ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
+					<a class="mdl-navigation__link" ng-show="$authData"><img ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
 				</nav>
 				</div>
 			</header>
 			<div class="mdl-layout__drawer">
 				<span class="mdl-layout__title">Questions Room: {{roomId}}</span>
 				<nav class="mdl-navigation">
-					<a class="mdl-navigation__link"><img ng-show="$authData" ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
+					<a class="mdl-navigation__link" ng-show="$authData"><img ng-src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />{{$authData.facebook.displayName}}</a>
 					<a class="mdl-navigation__link" href="index.html">Home</a>
 					<a class="mdl-navigation__link" ng-href="question.html#/{{roomId}}">Question</a>
 					<a class="mdl-navigation__link" href="#">Polling</a>

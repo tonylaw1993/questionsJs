@@ -14,14 +14,14 @@ div {
 	text-decoration: line-through;
 }
 
-.raisequestion{
+.raisequestion {
 	padding-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
 }
 
-.mdl-textfield{
+.mdl-textfield {
 	width: 100%;
 }
 
@@ -41,29 +41,31 @@ div {
 }
 
 
-.questionsection{
+.questionsection {
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
 }
 
-.questionsection .reply{
+.questionsection .reply {
 	padding-left: 0px;
 	width: 100%;
 }
 
-.questionsection   h3 {
+.questionsection h3 {
 	width: 100%;
-	word-wrap:break-word;
+	word-wrap: break-word;
 	
 }
+
 
 .questionsection p {
     font-size: 16px;
     letter-spacing: 0;
-    width: 90%;
+    /*width: 90%;*/
     margin: 0 0 0px;
     padding-left: 25px;
+
 }
 
 .questionsection .mdl-card__title {
@@ -99,7 +101,7 @@ div {
   min-height: 76px;
 }
 
- .questionsection  .mdl-textfield__input {
+.questionsection  .mdl-textfield__input {
    border: 1px solid rgba(0,0,0,.12);
     border-bottom: 1px solid rgba(0,0,0,.12);
     display: block;
@@ -129,19 +131,30 @@ div {
     font-weight: 400;
 }
 
-.questionsection .mdl-card{
+.questionsection .mdl-card {
 	min-height: 0px;
 	margin-bottom: 10px;
 }
+.photo_thumbnail {
+    width: 20%;
+    padding: 1px;
+    border: 1px solid gray;
+    border-radius: 10px;
 
-.raisepoll{
+}
+
+.photo_enlarge {
+    width: 100%;
+}
+
+.raisepoll {
 	padding-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
 }
 
-.pollList{
+.pollList {
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
@@ -287,6 +300,14 @@ div {
 	
 }
 */
+
+#photoUploader{
+	visibility: hidden;
+	width: 0px;
+	height: 0px;
+}
+
+
 
 
 /* ---------------------------------------------- /*
