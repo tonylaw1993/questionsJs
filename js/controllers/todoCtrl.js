@@ -151,6 +151,9 @@ $scope.addTodo = function () {
 	}
 	*/
 	
+	if ($scope.input.photo === undefined) {
+		$scope.input.photo = null;
+	}
 	
 	$scope.todos.$add({
 		wholeMsg: newTodo,
