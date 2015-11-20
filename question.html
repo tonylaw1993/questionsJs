@@ -141,7 +141,7 @@
 							<button class="mdl-button mdl-js-button" ng-click="minDislike(todo)" ng-show="$storage[todo.$id].disliked"><i class="fa fa-thumbs-down"></i>Dislike <span class="badge">{{todo.dislike}}</span></button>
 							
 							
-                     <button class="mdl-button mdl-js-button" ng-click="showReply = !showReply" ng-init="showReply = false"><i class="fa fa-comment-o"></i> Comment <span class="badge">{{todo.numReply}}</span></button>
+                     <button class="mdl-button mdl-js-button" ng-click="showReply = !showReply" ng-init="showReply = false"><i class="material-icons">chat_bubble_outline</i> Comment <span class="badge">{{todo.numReply}}</span></button>
                      
                      <tt><span ng-show="todo.tags">tags: {{todo.tags}}</span></tt>
 					
