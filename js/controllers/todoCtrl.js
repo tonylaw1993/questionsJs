@@ -105,12 +105,6 @@ $scope.$watchCollection('replies', function () {
 		 if (!reply || reply.replyMsg == "") {
 			return;
 		}
-		if ($scope.$storage[reply.$id] == undefined){
-                $scope.$storage[reply.$id] = {
-                        liked: false,
-                        disliked: false
-                        }
-                }
     });
 }, true);
 
