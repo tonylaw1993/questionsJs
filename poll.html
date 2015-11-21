@@ -128,7 +128,7 @@
         <div ng-repeat="item in poll.items">
         
             
-				<svg class="chart" width="240" height="120"><g><rect width="{{(item.vote+0.1)/(poll.totalVote)*240}}" height="19"></rect>
+				<svg class="chart" width="240" height="120"><g><rect width="{{(item.vote)/(poll.totalVote)*240}}" height="19"></rect>
 
 				<text x="10" y="9.5" dy=".35em">{{item.option}}</text>
 				</g>
