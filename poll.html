@@ -133,6 +133,7 @@
 				<text x="10" y="9.5" dy=".35em">{{item.option}}</text>
 				</g>
 				</svg>
+				<span class="mdl-badge" data-badge="{{item.vote}}"></span>
         </div>
 		</br>
 		<h5>Vote for:</h5>
@@ -141,7 +142,7 @@
 				
 				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
 					<input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted" >
-					<span class="mdl-badge" data-badge="{{item.vote}}"> <span class="mdl-checkbox__label">{{item.option}}</span></span>
+					 <span class="mdl-checkbox__label">{{item.option}}</span>
 				</label>
         </div>
 		</br>
