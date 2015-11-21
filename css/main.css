@@ -163,10 +163,11 @@ div {
     width: 90%;
 }
 .pollList .chart {
-    display: inline-block;
+   display: inline-block;
     height: 20px;
     margin: 5px 0;
     position: relative;
+    background-color: #F5F9F9;
     text-align: center;
     
 
@@ -181,7 +182,7 @@ div {
 
 
 .chart rect {
-  fill: steelblue;
+  fill: #009688;
 }
 
 .chart text {
