@@ -127,8 +127,8 @@
 	   <div class="mdl-card__supporting-text">
         <div ng-repeat="item in poll.items">
         
-
-				<svg class="chart" width="240" height="120"><g><rect width="{{(item.vote)/(poll.totalVote)*240}}" height="19"></rect>
+            
+				<svg class="chart" width="240" height="120"><g><rect width="{{(item.vote+0.1)/(poll.totalVote)*240}}" height="19"></rect>
 
 				<text x="10" y="9.5" dy=".35em">{{item.option}}</text>
 				</g>
@@ -138,12 +138,11 @@
 		</br>
 		<h5>Vote for:</h5>
         <div ng-repeat="item in poll.items">
-        
-				
-				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-					<input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted" >
-					 <span class="mdl-checkbox__label">{{item.option}}</span>
-				</label>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" ng-click="addVote($index)" ng-disabled="$storage[poll.$id].voted">
+                <i class="material-icons">done</i>
+            </button>
+				<span class="mdl-checkbox__label">{{item.option}}</span>
+
         </div>
 		</br>
         <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
