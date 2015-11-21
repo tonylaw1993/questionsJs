@@ -454,6 +454,7 @@ function readImage(event) {
         console.log("Your browser does not support File API");
     }
 }
-document.getElementById("photoUploader").addEventListener("change", readImage, false);
+$("#photoUploader").on("change", readImage);
+//document.getElementById("photoUploader").addEventListener("change", readImage, false);
 
 }]);
