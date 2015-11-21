@@ -89,7 +89,7 @@
                         
                         <div ng-repeat="x in getOptions(numOfChoice) track by $index" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " >
 						<label class="mdl-textfield__label">Option {{$index + 1}}.</label>
-						<input type="text" class="mdl-textfield__input" ng-model="options[$index]" ng-minlength="3" maxlength="50" required>
+						<input type="text" class="mdl-textfield__input" ng-model="options[$index]" ng-minlength="1" maxlength="50" required>
 						</input>
 						</div>
                     </div>
@@ -144,6 +144,7 @@
 					<span class="mdl-badge" data-badge="{{item.vote}}"> <span class="mdl-checkbox__label">{{item.option}}</span></span>
 				</label>
         </div>
+		</br>
         <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
        </div>
     </div>

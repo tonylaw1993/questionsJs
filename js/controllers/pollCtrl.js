@@ -65,7 +65,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
         var i = 0;
         var temp = [];
         for (; i<$scope.numOfChoice; i++){
-            if ($scope.options[i] == "" || $scope.options[i].length < 3){
+            if ($scope.options[i] == "" || $scope.options[i].length < 1){
                 $scope.postable = false;
                 return;
             }
