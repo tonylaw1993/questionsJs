@@ -30,7 +30,8 @@ module.exports = function(config) {
 			'js/dummy.js',
 			'test/unit/dummyTest.js',
 			'js/lib/custom.js',
-			'js/lib/jquery.emojipicker.a.js'
+			'js/lib/jquery.emojipicker.a.js',
+			'js/lib/photoUpload.js',
     ],
 
 

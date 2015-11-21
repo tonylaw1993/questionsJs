@@ -20,7 +20,9 @@ var sampleTodo = {
 		echo: 0,
 		dislike: 0,
 		order: 0,
-		latest: true
+		latest: true,
+		numReply: 0,
+		photos: []
 };
 
 var questionList=[{
@@ -33,7 +35,10 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 3,
-  order: 3
+  order: 3,
+  latest: true,
+  numReply: 0,
+  photos: []
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -44,7 +49,10 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 2,
-  order: 4
+  order: 4,
+  latest: true,
+  numReply: 0,
+  photos: []
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -55,7 +63,10 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 2,
-  order: 5
+  order: 5,
+  latest: true,
+  numReply: 0,
+  photos: []
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -66,7 +77,10 @@ var questionList=[{
   timestamp: 0,
   tags: "...",
   echo: 2,
-  order: 6
+  order: 6,
+  latest: true,
+  numReply: 0,
+  photos: []
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -77,7 +91,10 @@ var questionList=[{
   timestamp: new Date().getTime(), //new
   tags: "...",
   echo: 2,
-  order: 0
+  order: 0,
+  latest: true,
+  numReply: 0,
+  photos: []
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -88,7 +105,10 @@ var questionList=[{
   timestamp: new Date().getTime()-1, //new
   tags: "...",
   echo: 0,
-  order: 2
+  order: 2,
+  latest: true,
+  numReply: 0,
+  photos: []
 },{
   wholeMsg: "newTodo",
   head: "head",
@@ -99,7 +119,10 @@ var questionList=[{
   timestamp: new Date().getTime(), // latest
   tags: "...",
   echo: 0,
-  order: 1
+  order: 1,
+  latest: true,
+  numReply: 0,
+  photos: []
 }];
 
 describe('TodoCtrl', function() {
@@ -190,6 +213,7 @@ describe('TodoCtrl', function() {
 				scope.input = {};
 				scope.input.head="";
 				scope.input.wholeMsg = "";
+				scope.input.photos = [];
 				scope.addTodo();
 				
 				//expect(scope.todos.length).toBe(0);
@@ -208,6 +232,7 @@ describe('TodoCtrl', function() {
 				scope.input = {};
 				scope.input.head = undefined;
 				scope.input.wholeMsg = undefined;
+				scope.input.photos = [];
 				scope.addTodo();
 				//expect(scope.todos.length).toBe(0);
 			});
@@ -225,6 +250,7 @@ describe('TodoCtrl', function() {
 				scope.input = {};
 				scope.input.head = "Hello?";
 				scope.input.wholeMsg = "Hello";
+				scope.input.photos = [];
 				scope.addTodo();
 				//console.log(scope.todos);
 				//expect(scope.todos.length).toBe(1);
@@ -244,6 +270,7 @@ describe('TodoCtrl', function() {
 				scope.input = {};
 				scope.input.head = "Hello?"
 				scope.input.wholeMsg = "Hello";
+				scope.input.photos = [];
 				var toDo = scope.addTodo();
 				scope.editTodo(toDo);
 			});
@@ -285,6 +312,7 @@ describe('TodoCtrl', function() {
 				scope.input = {};
 				scope.input.head = "Hello?"
 				scope.input.wholeMsg = "Hello";
+				scope.input.photos = [];
 				var toDo = scope.addTodo();
 				var dum_todo = {
 					echo: 0,
@@ -307,6 +335,7 @@ describe('TodoCtrl', function() {
 				scope.input = {};
 				scope.input.head = "Hello?"
 				scope.input.wholeMsg = "Hello";
+				scope.input.photos = [];
 				var toDo = scope.addTodo();
 				var dum_todo = {
 					echo: 0,
