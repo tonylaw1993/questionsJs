@@ -89,6 +89,8 @@ div {
   min-height: 64px;
   display: -webkit-box;
   align-items: center;
+  margin-left: 20px;
+    padding-right: 50px;
 }
 .questionsection .mdl-card__supporting-text strong {
   font-weight: 400;
