@@ -86,7 +86,7 @@
                         <select id="numberOfChoice" ng-model="numOfChoice" ng-options="choice as choice for choice in choices">
                         </select>
                         </label>
-                        <label class="mdl-textfield__label">Options</label>
+                        
                         <div ng-repeat="x in getOptions(numOfChoice) track by $index" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " >
 						<label class="mdl-textfield__label">Option {{$index + 1}}.</label>
 						<input type="text" class="mdl-textfield__input" ng-model="options[$index]" ng-minlength="3" maxlength="50" required>
@@ -110,13 +110,13 @@
 				<h2>Poll List</h2>		
 				
 		 <!-- Poll listing -->
-    <div class="mdl-card mdl-shadow--4dp" style="width: 100%;">
+    
     <!-- For non-xs device -->
 	
     
 		<div class="mdl-cell mdl-cell--12-col">
     <div ng-repeat="poll in polls | pollFilter: polls.length" class="list-group">
-       
+       <div class="mdl-card mdl-shadow--4dp" style="width: 100%;">
 	   <div class="mdl-card__title">
 						
 						<h3 class="mdl-card__title-text"  style="word-wrap: break-word;">{{poll.head}}</h3>
@@ -124,14 +124,16 @@
 						<i class="material-icons" ng-show="poll.latest">fiber_new</i>
 			
 					</div>
-	   
+	   <div class="mdl-card__supporting-text">
         <div ng-repeat="item in poll.items">
         
-				<svg class="chart" width="420" height="120"><g><rect width="{{(item.vote)/(poll.totalVote+1)*420}}" height="19"></rect>
+				<svg class="chart" width="240" height="120"><g><rect width="{{(item.vote)/(poll.totalVote)*240}}" height="19"></rect>
 				<text x="10" y="9.5" dy=".35em">{{item.option}}</text>
 				</g>
 				</svg>
         </div>
+		</br>
+		<h5>Vote for:</h5>
         <div ng-repeat="item in poll.items">
         
 				
@@ -141,7 +143,7 @@
 				</label>
         </div>
         <tt>posted: <span am-time-ago="poll.timestamp"></span> </tt>
-        <hr>
+       </div>
     </div>
     </div>
     
