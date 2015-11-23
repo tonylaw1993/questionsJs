@@ -98,7 +98,8 @@
 				<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="emoji" ng-disabled="!mobile"><i class="material-icons">mood</i></button>
             <input type="file" ng-disabled="!mobile" id="photoUploader" accept="image/*" multiple="multiple" />
             <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" ng-model="imageDone" type="button" id="buttonPhoto"><i class="material-icons">insert_photo</i></button>
-			<i class="material-icons" ng-show="imageDone">done</i>
+			<i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored" ng-show="imageUploaded" id="imageDone">done</i>
+			<span id="txtImageUploaded" ng-show="imageUploaded">Uploaded</span>
 		      <span ng-show="!postable" class="" role="alert">Title/Content must have more than 3 characters! Please don't spam emojis!</span>
 
 	<!--<img id="photoUploaded" ng-show="input.photo" ng-src="{{ input.photo || '//:0' }}">-->		

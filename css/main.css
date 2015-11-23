@@ -332,8 +332,19 @@ div {
 	height: 0px;
 }
 
+#photoInput{
+	display: block;
+}
 
+#imageDone{
+	padding-top: 6px;
+}
 
+#txtImageUploaded{
+	color: #3f51b5;
+	font: 300 16px/1.8 'Raleway', sans-serif;
+	font-weight: bold;
+}
 
 /* ---------------------------------------------- /*
  *	List-group

@@ -61,6 +61,8 @@ $scope.editedReply = null;
 $scope.postable = true;
 $scope.replyable = true;
 
+$scope.imageUploaded = false;
+
 
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
@@ -186,6 +188,7 @@ $scope.addTodo = function () {
 	$scope.input.wholeMsg = '';
 	$scope.input.photos = [];
 	$("#photoUploader").val('');
+	$scope.imageUploaded = false;
 };
 
 $scope.editTodo = function (todo) {
@@ -435,8 +438,8 @@ function readImage(event) {
     if (window.File && window.FileList && window.FileReader) {
         event = event || window.event;
         var files = event.target.files; //FileList object
-
-        for (var i = 0; i < files.length; i++) {
+		
+        for (var i = 0; i < files.length && i < 5; i++) {
             var file = files[i];
             //Only pics
             if (!file.type.match('image')) continue;
@@ -449,6 +452,7 @@ function readImage(event) {
 
             //Read the image
             picReader.readAsDataURL(file);
+			$scope.imageUploaded = true;
         }
     } else {
         console.log("Your browser does not support File API");
