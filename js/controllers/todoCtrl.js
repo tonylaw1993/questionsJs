@@ -438,8 +438,8 @@ function readImage(event) {
     if (window.File && window.FileList && window.FileReader) {
         event = event || window.event;
         var files = event.target.files; //FileList object
-
-        for (var i = 0; i < files.length; i++) {
+		
+        for (var i = 0; i < files.length && i < 5; i++) {
             var file = files[i];
             //Only pics
             if (!file.type.match('image')) continue;
