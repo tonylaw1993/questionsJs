@@ -278,7 +278,7 @@ $scope.addReply = function (todo){
         like: 0,
         dislike: 0,
         timestamp: new Date().getTime(),
-        parentId: todo.$id
+        parentid: todo.$id
     }).then(function(ref){
         var id = ref.key();
         $scope.$storage[id] = {
