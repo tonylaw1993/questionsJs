@@ -167,7 +167,7 @@
            <div class="comment_list">
 					<h5>Comment:</h5>
 		   
-				<div class="mdl-card  reply" ng-repeat="reply in replies | filter: {parentId: todo.$id} | orderBy: ['-reply.like','-reply.timestamp']">
+				<div class="mdl-card  reply" ng-repeat="reply in replies | filter: {parentid: todo.$id} | orderBy: ['-reply.like','-reply.timestamp']">
 				
 					<div class="mdl-card__supporting-text">
 					<p><span ng-bind-html="reply.replyMsg | linky" style="white-space: pre-line"></span></p>
