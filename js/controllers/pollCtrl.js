@@ -16,7 +16,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, $sani
     }
 
     // TODO: Please change this URL for your app
-    var firebaseURL = "https://scorching-inferno-6291.firebaseio.com/";
+    var firebaseURL = "https://android-questions.firebaseio.com/";
 
     $scope.roomId = roomId;
     var url = firebaseURL + roomId + "/polls/";
